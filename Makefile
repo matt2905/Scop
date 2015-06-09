@@ -6,7 +6,7 @@
 #    By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/06/06 14:10:02 by mmartin           #+#    #+#              #
-#    Updated: 2015/06/09 17:16:51 by mmartin          ###   ########.fr        #
+#    Updated: 2015/06/09 19:43:01 by mmartin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,6 +48,8 @@ $(MLX):
 	@Make -C minilibx
 
 $(LIBFT):
+	@git submodule init
+	@git submodule update
 	@Make -C libft
 
 -include	$(OBJ:.o=.d)
