@@ -1,0 +1,62 @@
+# Blender MTL File: 'watercar.blend'
+# Material Count: 6
+
+newmtl MatCanon
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd UVWatercarCanon.png
+
+newmtl MatRoueAvt
+Ns 382.500015
+Ka 0.000000 0.000000 0.000000
+Kd 0.604000 0.604000 0.604000
+Ks 0.241000 0.241000 0.241000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd roues.png
+
+newmtl MatRoueAvt_roues.001
+Ns 382.500015
+Ka 0.000000 0.000000 0.000000
+Kd 0.604000 0.604000 0.604000
+Ks 0.241000 0.241000 0.241000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd roues.png
+
+newmtl MatRoueAvt_roues.003
+Ns 382.500015
+Ka 0.000000 0.000000 0.000000
+Kd 0.604000 0.604000 0.604000
+Ks 0.241000 0.241000 0.241000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd roues.png
+
+newmtl MatTruck
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd /nfs/zfs-student-4/users/2013/nd-heyge/Documents/MM/UVWatercar.png
+
+newmtl Material
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd /nfs/zfs-student-4/users/2013/nd-heyge/Documents/MM/UVWatercar.png
