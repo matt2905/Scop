@@ -6,7 +6,7 @@
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/09 17:11:04 by mmartin           #+#    #+#             */
-/*   Updated: 2015/06/10 10:07:13 by mmartin          ###   ########.fr       */
+/*   Updated: 2015/06/10 13:12:30 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ static char	*ft_load_shader(const char *file)
 		ft_putendl_fd("ft_load_shader(): malloc failed", 2);
 		return (NULL);
 	}
-	size = fread(src, size, 1, fp);
-	src[size] = '\0';
+	fread(src, size, 1, fp);
+	fclose(fp);
 	return (src);
 }
 
@@ -69,7 +69,7 @@ GLuint		ft_get_shader(GLenum type, const char *file)
 	return (shader);
 }
 
-void		ft_attachShader(GLuint program, GLuint shader)
+void		ft_attach_shader(GLuint program, GLuint shader)
 {
 	if (shader)
 	{

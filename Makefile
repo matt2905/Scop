@@ -6,7 +6,7 @@
 #    By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/06/06 14:10:02 by mmartin           #+#    #+#              #
-#    Updated: 2015/06/10 11:53:26 by mmartin          ###   ########.fr        #
+#    Updated: 2015/06/10 13:35:10 by mmartin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,8 +22,9 @@ MLX			=	minilibx/libmlx.a
 DOBJ		=	obj/
 
 SRC			=	srcs/main.c					\
+				srcs/ft_create_object.c		\
 				srcs/ft_delete_object.c		\
-				srcs/ft_get_faces.c			\
+				srcs/ft_get_fragments.c		\
 				srcs/ft_get_light.c			\
 				srcs/ft_get_materials.c		\
 				srcs/ft_get_object.c		\

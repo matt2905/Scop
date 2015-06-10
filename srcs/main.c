@@ -6,7 +6,7 @@
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/06 14:11:07 by mmartin           #+#    #+#             */
-/*   Updated: 2015/06/10 11:54:02 by mmartin          ###   ########.fr       */
+/*   Updated: 2015/06/10 13:44:47 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "libft.h"
 #include "ft_scop.h"
 
-int		ft_usage(char *cmd)
+static int		ft_usage(char *cmd)
 {
 	ft_putstr_fd("Usage: ", 2);
 	ft_putstr_fd(cmd, 2);
@@ -23,12 +23,25 @@ int		ft_usage(char *cmd)
 	return (1);
 }
 
-int		ft_init_mlx(t_data *d)
+static void		ft_init_opengl(void)
+{
+	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+	glClearDepth(1.0f);
+	glDisable(GL_BLEND);
+	glEnable(GL_DEPTH_TEST);
+	glDepthFunc(GL_LEQUAL);
+	glEnable(GL_CULL_FACE);
+	glFrontFace(GL_CCW);
+	glCullFace(GL_BACK);
+}
+
+static int		ft_init_mlx(t_data *d)
 {
 	if ((d->mlx = mlx_init()) == NULL)
 		return (1);
-	d->win = mlx_new_opengl_window(d->mlx, 1024, 1024, "Scop by mmartin");
+	d->win = mlx_new_opengl_window(d->mlx, WIDTH, HEIGHT, "Scop by mmartin");
 	mlx_opengl_window_set_context(d->win);
+	ft_init_opengl();
 	ft_init(d);
 	mlx_expose_hook(d->win, &ft_expose, d);
 	mlx_hook(d->win, 2, 0, ft_key_press, d);
@@ -37,7 +50,7 @@ int		ft_init_mlx(t_data *d)
 	return (0);
 }
 
-int		main(int argc, char **argv)
+int				main(int argc, char **argv)
 {
 	char	*ext;
 	t_data	*d;

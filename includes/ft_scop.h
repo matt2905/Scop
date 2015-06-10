@@ -6,7 +6,7 @@
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/06 16:16:04 by mmartin           #+#    #+#             */
-/*   Updated: 2015/06/10 11:52:49 by mmartin          ###   ########.fr       */
+/*   Updated: 2015/06/10 13:33:38 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,9 @@ int				ft_expose(t_data *d);
 int				ft_loop_hook(t_data *d);
 void			ft_init(t_data *d);
 void			ft_set_perspective(float fov, float a, float near, float far);
+void			ft_create_objects(t_data *d);
+GLuint			ft_get_shader(GLenum type, const char *file);
+void			ft_attach_shader(GLuint program, GLuint shader);
 
 void			ft_delete_obj(t_data *d);
 void			ft_delete_face(t_obj *o);
@@ -157,6 +160,6 @@ void			ft_get_vertex(t_data *d, t_obj *n, char **tab);
 void			ft_get_texture(t_data *d, t_obj *n, char **tab);
 void			ft_get_normalize(t_data *d, t_obj *n, char **tab);
 void			ft_get_material(t_data *d, t_obj *n, char **tab);
-void			ft_get_faces(t_data *d, t_obj *n, char **tab);
+void			ft_get_fragments(t_data *d, t_obj *n, char **tab);
 
 #endif

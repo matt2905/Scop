@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_get_faces.c                                     :+:      :+:    :+:   */
+/*   ft_get_fragments.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/10 11:07:54 by mmartin           #+#    #+#             */
-/*   Updated: 2015/06/10 11:54:30 by mmartin          ###   ########.fr       */
+/*   Updated: 2015/06/10 13:35:24 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ static int	ft_count_previous_texture(t_data *d)
 		i++;
 	}
 	return (len);
-
 }
 
 static int	ft_count_previous_normal(t_data *d)
@@ -57,10 +56,9 @@ static int	ft_count_previous_normal(t_data *d)
 		i++;
 	}
 	return (len);
-
 }
 
-static void	ft_get_face(t_data *d, t_face *f, int len, char **tab)
+static void	ft_get_fragment(t_data *d, t_face *f, int len, char **tab)
 {
 	char	**indices;
 	int		i;
@@ -82,7 +80,7 @@ static void	ft_get_face(t_data *d, t_face *f, int len, char **tab)
 	}
 }
 
-void		ft_get_faces(t_data *d, t_obj *new, char **tab)
+void		ft_get_fragments(t_data *d, t_obj *new, char **tab)
 {
 	int		len;
 	t_face	*f;
@@ -92,7 +90,7 @@ void		ft_get_faces(t_data *d, t_obj *new, char **tab)
 	len = ft_tablen(tab);
 	f = (t_face *)ft_memalloc(sizeof(*f) * (len + 1));
 	f[0].len = len;
-	ft_get_face(d, f, len, tab);
+	ft_get_fragment(d, f, len, tab);
 	save = (t_face **)ft_memalloc(sizeof(*save) * (new->nb_f));
 	if (new->f)
 	{
