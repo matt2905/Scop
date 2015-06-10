@@ -6,7 +6,7 @@
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/08 11:06:43 by mmartin           #+#    #+#             */
-/*   Updated: 2015/06/08 16:45:51 by mmartin          ###   ########.fr       */
+/*   Updated: 2015/06/10 11:17:54 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,33 +96,4 @@ void	ft_get_material(t_data *d, t_obj *new, char **tab)
 		else
 			i++;
 	}
-}
-
-void	ft_get_face(t_data *d, t_obj *new, char **tab)
-{
-	char	**indices;
-	int		len;
-	int		i;
-	t_face	*f;
-	t_face	**save;
-
-	(void)d;
-	new->nb_f++;
-	i = 0;
-	len = ft_tablen(tab);
-	f = (t_face *)ft_memalloc(sizeof(*f) * (len + 1));
-	f[0].len = len;
-	while (++i < len && (indices = ft_strsplit(tab[i], '/')))
-	{
-		f[i].iv = ft_atof(indices[0]);
-		f[i].ivt = (ft_tablen(indices) > 1 ? ft_atof(indices[1]) : 0);
-		f[i].ivn = (ft_tablen(indices) > 2 ? ft_atof(indices[2]) : 0);
-		ft_tabdel(&indices);
-	}
-	save = (t_face **)ft_memalloc(sizeof(*f) * (new->nb_f));
-	if (new->f)
-		ft_memcpy(save, new->f, sizeof(*new->f) * (new->nb_f - 1)),
-		ft_memdel((void **)&new->f);
-	save[new->nb_f - 1] = f;
-	new->f = save;
 }

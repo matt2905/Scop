@@ -6,7 +6,7 @@
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/08 10:44:59 by mmartin           #+#    #+#             */
-/*   Updated: 2015/06/08 14:43:05 by mmartin          ###   ########.fr       */
+/*   Updated: 2015/06/10 11:12:57 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static const t_parse	g_parse[] =
 	{"vt", ft_get_texture},
 	{"vn", ft_get_normalize},
 	{"usemtl", ft_get_material},
-	{"f", ft_get_face}
+	{"f", ft_get_faces}
 };
 
 static void		ft_loop_object(t_data *d, int fd, t_obj *new)

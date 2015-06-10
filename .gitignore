@@ -35,5 +35,8 @@ obj/
 *.hex
 scop
 
+# config for vim syntastic
+.syntastic_c_config
+
 # Debug files
 *.dSYM/

@@ -6,12 +6,17 @@
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/06 16:16:04 by mmartin           #+#    #+#             */
-/*   Updated: 2015/06/09 12:21:09 by mmartin          ###   ########.fr       */
+/*   Updated: 2015/06/10 11:52:49 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_SCOP_H
 # define FT_SCOP_H
+
+# include <OpenGL/GL.h>
+
+# define WIDTH	1024
+# define HEIGHT	1024
 
 typedef struct	s_vertex
 {
@@ -92,6 +97,14 @@ typedef struct	s_data
 	t_obj		*objs;
 	int			nb_mat;
 	int			nb_obj;
+	GLuint		program;
+	GLuint		camera_pos_loc;
+	GLuint		light_pos_loc;
+	GLuint		light_col_loc;
+	float		rotate;
+	float		camera_pos[3];
+	float		light_pos[3];
+	float		light_col[3];
 }				t_data;
 
 t_data			*ft_parse(char *file);
@@ -102,6 +115,8 @@ t_data			*ft_parse(char *file);
 int				ft_key_press(int keycode, t_data *d);
 int				ft_expose(t_data *d);
 int				ft_loop_hook(t_data *d);
+void			ft_init(t_data *d);
+void			ft_set_perspective(float fov, float a, float near, float far);
 
 void			ft_delete_obj(t_data *d);
 void			ft_delete_face(t_obj *o);
@@ -109,7 +124,6 @@ void			ft_delete_face(t_obj *o);
 /*
 **	function for parse materials
 */
-
 void			ft_get_materials(t_data *d, char *file_mat, char *file_obj);
 
 typedef struct	s_mat_p
@@ -125,12 +139,12 @@ void			ft_get_diffuse(t_data *d, int *i, char **tab);
 void			ft_get_specular(t_data *d, int *i, char **tab);
 void			ft_get_density(t_data *d, int *i, char **tab);
 void			ft_get_transparency(t_data *d, int *i, char **tab);
+
 void			ft_get_light_calc(t_data *d, int *i, char **tab);
 
 /*
 **	function for parse one object.
 */
-
 void			ft_get_object(t_data *d, int fd, char *tmp);
 
 typedef struct	s_parse
@@ -143,6 +157,6 @@ void			ft_get_vertex(t_data *d, t_obj *n, char **tab);
 void			ft_get_texture(t_data *d, t_obj *n, char **tab);
 void			ft_get_normalize(t_data *d, t_obj *n, char **tab);
 void			ft_get_material(t_data *d, t_obj *n, char **tab);
-void			ft_get_face(t_data *d, t_obj *n, char **tab);
+void			ft_get_faces(t_data *d, t_obj *n, char **tab);
 
 #endif

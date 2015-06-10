@@ -6,7 +6,7 @@
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/06 14:11:07 by mmartin           #+#    #+#             */
-/*   Updated: 2015/06/09 12:29:14 by mmartin          ###   ########.fr       */
+/*   Updated: 2015/06/10 11:54:02 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int		ft_init_mlx(t_data *d)
 		return (1);
 	d->win = mlx_new_opengl_window(d->mlx, 1024, 1024, "Scop by mmartin");
 	mlx_opengl_window_set_context(d->win);
+	ft_init(d);
 	mlx_expose_hook(d->win, &ft_expose, d);
 	mlx_hook(d->win, 2, 0, ft_key_press, d);
 	mlx_loop_hook(d->mlx, &ft_loop_hook, d);
