@@ -6,7 +6,7 @@
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/08 16:46:52 by mmartin           #+#    #+#             */
-/*   Updated: 2015/06/10 13:45:38 by mmartin          ###   ########.fr       */
+/*   Updated: 2015/06/11 17:11:13 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,12 @@ static unsigned int	ft_get_ticks(void)
 
 static void			ft_render(t_data *d)
 {
-	size_t	size;
-
-	size = (d->objs[0].nb_f + 1) * 2 * 8;
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glUseProgram(d->program);
-	glUniform3fv(d->camera_pos_loc, 1, d->camera_pos);
-	glUniform3fv(d->light_pos_loc, 1, d->light_pos);
-	glUniform3fv(d->light_col_loc, 1, d->light_col);
-	glDrawArrays(GL_TRIANGLE_STRIP, 0, size);
+//	glUniform3fv(d->camera_pos_loc, 1, d->camera_pos);
+//	glUniform3fv(d->light_pos_loc, 1, d->light_pos);
+//	glUniform3fv(d->light_col_loc, 1, d->light_col);
+	glDrawArrays(GL_TRIANGLES, 0, d->size);
 	glUseProgram(0);
 	mlx_opengl_swap_buffers(d->win);
 }

@@ -6,7 +6,7 @@
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/08 10:44:59 by mmartin           #+#    #+#             */
-/*   Updated: 2015/06/10 13:33:53 by mmartin          ###   ########.fr       */
+/*   Updated: 2015/06/11 12:18:24 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,12 @@ static void		ft_loop_object(t_data *d, int fd, t_obj *new)
 	len = sizeof(g_parse) / sizeof(t_parse);
 	while (get_next_line(fd, &line) > 0 && ft_strncmp(line, "o ", 2))
 	{
-		i = 0;
+		i = -1;
 		tab = ft_strsplit(line, ' ');
-		while (i < len)
+		while (++i < len)
 		{
 			if (!ft_strcmp(g_parse[i].cmp, tab[0]))
 				g_parse[i].func(d, new, tab);
-			i++;
 		}
 		ft_tabdel(&tab);
 		ft_strdel(&line);

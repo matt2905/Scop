@@ -6,7 +6,7 @@
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/06 16:16:04 by mmartin           #+#    #+#             */
-/*   Updated: 2015/06/10 13:33:38 by mmartin          ###   ########.fr       */
+/*   Updated: 2015/06/11 12:01:03 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ typedef struct	s_data
 	float		camera_pos[3];
 	float		light_pos[3];
 	float		light_col[3];
+	size_t		size;
 }				t_data;
 
 t_data			*ft_parse(char *file);
