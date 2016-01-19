@@ -6,7 +6,7 @@
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/09 17:11:04 by mmartin           #+#    #+#             */
-/*   Updated: 2015/06/10 13:12:30 by mmartin          ###   ########.fr       */
+/*   Updated: 2016/01/18 18:16:03 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ static char	*ft_load_shader(const char *file)
 		return (NULL);
 	}
 	fread(src, size, 1, fp);
+	src[size] = '\0';
 	fclose(fp);
 	return (src);
 }

@@ -6,14 +6,15 @@
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/06 16:16:04 by mmartin           #+#    #+#             */
-/*   Updated: 2015/06/11 12:01:03 by mmartin          ###   ########.fr       */
+/*   Updated: 2016/01/19 17:04:28 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_SCOP_H
 # define FT_SCOP_H
 
-# include <OpenGL/GL.h>
+# include <string.h>
+# include <OpenGL/gl3.h>
 
 # define WIDTH	1024
 # define HEIGHT	1024
@@ -98,17 +99,30 @@ typedef struct	s_data
 	int			nb_mat;
 	int			nb_obj;
 	GLuint		program;
+	GLuint		vid;
+	GLuint		cid;
+	GLuint		mid;
 	GLuint		camera_pos_loc;
 	GLuint		light_pos_loc;
 	GLuint		light_col_loc;
 	float		rotate;
-	float		camera_pos[3];
+	t_vertex	camera_pos;
+	t_vertex	camera_look;
+	t_vertex	camera_up;
 	float		light_pos[3];
 	float		light_col[3];
+	float		*v;
 	size_t		size;
+	float		*mvp;
 }				t_data;
 
 t_data			*ft_parse(char *file);
+
+t_vertex		ft_vector_min(t_vertex a, t_vertex b);
+t_vertex		ft_float_to_vector(float *src);
+t_vertex		ft_cross(t_vertex a, t_vertex b);
+void			ft_normalize_vector(t_vertex *src);
+float			ft_dot(t_vertex a, t_vertex b);
 
 /*
 **	ft_mlx_event.c
@@ -117,7 +131,7 @@ int				ft_key_press(int keycode, t_data *d);
 int				ft_expose(t_data *d);
 int				ft_loop_hook(t_data *d);
 void			ft_init(t_data *d);
-void			ft_set_perspective(float fov, float a, float near, float far);
+void			ft_set_perspective(t_data *d);
 void			ft_create_objects(t_data *d);
 GLuint			ft_get_shader(GLenum type, const char *file);
 void			ft_attach_shader(GLuint program, GLuint shader);

@@ -6,7 +6,7 @@
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/10 10:04:19 by mmartin           #+#    #+#             */
-/*   Updated: 2015/06/11 17:48:24 by mmartin          ###   ########.fr       */
+/*   Updated: 2016/01/19 13:52:37 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,20 @@
 
 static void	ft_init_scene(t_data *d)
 {
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	ft_set_perspective(M_PI / 4.0f, (float)WIDTH / (float)HEIGHT, 0.1f, 200.0f);
-	glMatrixMode(GL_MODELVIEW);
+	GLuint VertexArrayID;
+	glGenVertexArrays(1, &VertexArrayID);
+	glBindVertexArray(VertexArrayID);
+	d->mid = glGetUniformLocation(d->program, "MVP");
+	d->camera_pos.x = 4;
+	d->camera_pos.y = 3;
+	d->camera_pos.z = 3;
+	d->camera_look.x = 0;
+	d->camera_look.y = 0;
+	d->camera_look.z = 0;
+	d->camera_up.x = 0;
+	d->camera_up.y = 1;
+	d->camera_up.z = 0;
+	ft_set_perspective(d);
 	ft_create_objects(d);
 }
 
@@ -50,6 +60,5 @@ void		ft_init(t_data *d)
 		d->program = 0;
 		return ;
 	}
-	glBindFragDataLocationEXT(d->program, 0, "outColor");
 	ft_init_scene(d);
 }

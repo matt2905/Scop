@@ -6,7 +6,7 @@
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/08 16:46:52 by mmartin           #+#    #+#             */
-/*   Updated: 2015/06/11 17:11:13 by mmartin          ###   ########.fr       */
+/*   Updated: 2016/01/19 18:04:39 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,26 +16,22 @@
 #include <stdlib.h>
 #include <sys/time.h>
 #include "ft_scop.h"
+#include "libft.h"
 
 int					ft_key_press(int keycode, t_data *d)
 {
 	if (keycode == 53)
 	{
 		mlx_destroy_window(d->mlx, d->win);
+		ft_memdel((void **)&d->v);
 		exit(1);
 	}
-	d->camera_pos[0] += (keycode == 123 || keycode == 0 ? -1 : 0);
-	d->camera_pos[0] += (keycode == 124 || keycode == 2 ? 1 : 0);
-	d->camera_pos[1] += (keycode == 125 || keycode == 1 ? -1 : 0);
-	d->camera_pos[1] += (keycode == 126 || keycode == 13 ? 1 : 0);
-	d->camera_pos[2] += (keycode == 69 || keycode == 24 ? -1 : 0);
-	d->camera_pos[2] += (keycode == 78 || keycode == 27 ? 1 : 0);
-	return (0);
-}
-
-int					ft_expose(t_data *d)
-{
-	(void)d;
+	d->camera_pos.x += (keycode == 123 || keycode == 0 ? -1 : 0);
+	d->camera_pos.x += (keycode == 124 || keycode == 2 ? 1 : 0);
+	d->camera_pos.y += (keycode == 125 || keycode == 1 ? -1 : 0);
+	d->camera_pos.y += (keycode == 126 || keycode == 13 ? 1 : 0);
+	d->camera_pos.z += (keycode == 69 || keycode == 24 ? -1 : 0);
+	d->camera_pos.z += (keycode == 78 || keycode == 27 ? 1 : 0);
 	return (0);
 }
 
@@ -47,16 +43,30 @@ static unsigned int	ft_get_ticks(void)
 	return ((t.tv_sec * 1000) + (t.tv_usec / 1000));
 }
 
+#include <stdio.h>
 static void			ft_render(t_data *d)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glUseProgram(d->program);
-//	glUniform3fv(d->camera_pos_loc, 1, d->camera_pos);
-//	glUniform3fv(d->light_pos_loc, 1, d->light_pos);
-//	glUniform3fv(d->light_col_loc, 1, d->light_col);
-	glDrawArrays(GL_TRIANGLES, 0, d->size);
-	glUseProgram(0);
+	glUniformMatrix4fv(d->mid, 1, GL_FALSE, &d->mvp[0]);
+	glEnableVertexAttribArray(0);
+	glEnableVertexAttribArray(1);
+	glBindBuffer(GL_ARRAY_BUFFER, d->vid);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE,
+			6 * sizeof(float), (void *)0);
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE,
+			6 * sizeof(float), (void *)(3 * sizeof(float)));
+
+	glDrawArrays(GL_TRIANGLES, 0, d->size / 6);
+	glDisableVertexAttribArray(1);
+	glDisableVertexAttribArray(0);
 	mlx_opengl_swap_buffers(d->win);
+}
+
+int					ft_expose(t_data *d)
+{
+	ft_render(d);
+	return (0);
 }
 
 int					ft_loop_hook(t_data *d)

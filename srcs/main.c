@@ -6,7 +6,7 @@
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/06 14:11:07 by mmartin           #+#    #+#             */
-/*   Updated: 2015/06/11 17:07:32 by mmartin          ###   ########.fr       */
+/*   Updated: 2016/01/19 16:21:40 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,15 @@ static int		ft_usage(char *cmd)
 
 static void		ft_init_opengl(void)
 {
-	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-	glClearDepth(1.0f);
-	glDisable(GL_BLEND);
+	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
+//	glClearDepth(1.0f);
+//	glDisable(GL_BLEND);
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);
-	glDepthFunc(GL_LEQUAL);
-	glEnable(GL_CULL_FACE);
-	glFrontFace(GL_CCW);
-	glCullFace(GL_BACK);
+//	glDepthFunc(GL_LEQUAL);
+//	glEnable(GL_CULL_FACE);
+//	glFrontFace(GL_CCW);
+//	glCullFace(GL_BACK);
 }
 
 static int		ft_init_mlx(t_data *d)
