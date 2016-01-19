@@ -6,7 +6,7 @@
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/06 17:51:51 by mmartin           #+#    #+#             */
-/*   Updated: 2015/06/09 12:02:07 by mmartin          ###   ########.fr       */
+/*   Updated: 2016/01/19 19:01:46 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_data		*ft_parse(char *file)
 	{
 		if (!ft_strncmp(line, "mtllib ", 7))
 			ft_get_materials(d, line + 7, file);
-		else if (!ft_strncmp(line, "o ", 2))
+		else if (!ft_strncmp(line, "o ", 2) || !ft_strncmp(line, "v ", 2))
 			ft_get_object(d, fd, line);
 		ft_strdel(&line);
 	}

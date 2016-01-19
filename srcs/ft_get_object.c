@@ -6,7 +6,7 @@
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/08 10:44:59 by mmartin           #+#    #+#             */
-/*   Updated: 2015/06/11 12:18:24 by mmartin          ###   ########.fr       */
+/*   Updated: 2016/01/19 19:18:45 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ void			ft_get_object(t_data *d, int fd, char *tmp)
 		d->nb_obj = len;
 	}
 	d->objs = obj;
-	d->objs[len - 1].name = ft_strdup(tmp + 2);
+	if (!ft_strncmp(tmp, "o ", 2))
+		d->objs[len - 1].name = ft_strdup(tmp + 2);
 	ft_loop_object(d, fd, &d->objs[len - 1]);
 }

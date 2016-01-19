@@ -6,7 +6,7 @@
 #    By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/06/06 14:10:02 by mmartin           #+#    #+#              #
-#    Updated: 2016/01/19 13:18:33 by mmartin          ###   ########.fr        #
+#    Updated: 2016/01/19 20:33:19 by mmartin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ SRC			=	srcs/main.c					\
 				srcs/ft_get_object.c		\
 				srcs/ft_init.c				\
 				srcs/ft_matrix.c			\
+				srcs/ft_move.c				\
 				srcs/ft_mlx_event.c			\
 				srcs/ft_parse.c				\
 				srcs/ft_parse_object.c		\

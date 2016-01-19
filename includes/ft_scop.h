@@ -6,7 +6,7 @@
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/06 16:16:04 by mmartin           #+#    #+#             */
-/*   Updated: 2016/01/19 17:04:28 by mmartin          ###   ########.fr       */
+/*   Updated: 2016/01/19 20:35:52 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,11 @@ t_vertex		ft_float_to_vector(float *src);
 t_vertex		ft_cross(t_vertex a, t_vertex b);
 void			ft_normalize_vector(t_vertex *src);
 float			ft_dot(t_vertex a, t_vertex b);
+
+void			ft_right(t_data *d, float deltatime);
+void			ft_left(t_data *d, float deltatime);
+void			ft_up(t_data *d, float deltatime);
+void			ft_down(t_data *d, float deltatime);
 
 /*
 **	ft_mlx_event.c

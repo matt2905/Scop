@@ -6,7 +6,7 @@
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/10 10:53:50 by mmartin           #+#    #+#             */
-/*   Updated: 2016/01/19 18:04:13 by mmartin          ###   ########.fr       */
+/*   Updated: 2016/01/19 19:11:31 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ static void		ft_create_object(t_data *d, t_obj o, int *begin)
 	int			index;
 	int			i;
 	unsigned	j;
+	int			tmp;
 
 	index = *begin;
 	i = -1;
@@ -42,13 +43,15 @@ static void		ft_create_object(t_data *d, t_obj o, int *begin)
 		j = 0;
 		while (++j < o.f[i][0].len)
 		{
-			d->v[index] = o.v[o.f[i][j].iv - 1].x;
-			d->v[index + 1] = o.v[o.f[i][j].iv - 1].y;
-			d->v[index + 2] = o.v[o.f[i][j].iv - 1].z;
+			if (o.name)
+				tmp = o.f[i][j].iv - 1;
+			else
+				tmp = o.f[i][j].iv - 2;
+			tmp = (tmp > 0 ? tmp : tmp + 1);
+			d->v[index] = o.v[tmp].x;
+			d->v[index + 1] = o.v[tmp].y;
+			d->v[index + 2] = o.v[tmp].z;
 			ft_genere_color(d, index);
-//			v[index + 3] = o.nb_vn ? o.v[o.f[i][j].ivn - 1].x : 0;
-//			v[index + 4] = o.nb_vn ? o.v[o.f[i][j].ivn - 1].y : 0;
-//			v[index + 5] = o.nb_vn ? o.v[o.f[i][j].ivn - 1].z : 0;
 			index += 6;
 		}
 	}
