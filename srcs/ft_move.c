@@ -6,57 +6,65 @@
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/19 20:27:48 by mmartin           #+#    #+#             */
-/*   Updated: 2016/01/19 20:38:37 by mmartin          ###   ########.fr       */
+/*   Updated: 2016/01/21 17:40:58 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
 #include "ft_scop.h"
 
-void		ft_right(t_data *d, float deltatime)
+int		ft_right(t_data *d, double deltatime)
 {
 	t_vertex	right;
 
-	right.x = sin(3.14 - (3.14 / 2));
+	right.x = sin(d->angle_horizontal - (3.14 / 2.0));
 	right.y = 0;
-	right.z = cos(3.14 - (3.14 / 2));
+	right.z = cos(d->angle_horizontal - (3.14 / 2.0));
 	d->camera_pos.x += right.x * deltatime * 3;
 	d->camera_pos.y += right.y * deltatime * 3;
 	d->camera_pos.z += right.z * deltatime * 3;
+	return (1);
 }
 
-void		ft_left(t_data *d, float deltatime)
+int		ft_left(t_data *d, double deltatime)
 {
-	t_vertex	left;
+	t_vertex	right;
 
-	left.x = sin(3.14 - (3.14 / 2));
-	left.y = 0;
-	left.z = cos(3.14 - (3.14 / 2));
-	d->camera_pos.x -= left.x * deltatime * 3;
-	d->camera_pos.y -= left.y * deltatime * 3;
-	d->camera_pos.z -= left.z * deltatime * 3;
+	right.x = sin(d->angle_horizontal - (3.14 / 2.0));
+	right.y = 0;
+	right.z = cos(d->angle_horizontal - (3.14 / 2.0));
+	d->camera_pos.x -= right.x * deltatime * 3;
+	d->camera_pos.y -= right.y * deltatime * 3;
+	d->camera_pos.z -= right.z * deltatime * 3;
+	return (1);
 }
 
-void		ft_up(t_data *d, float deltatime)
+int		ft_up(t_data *d, double deltatime)
 {
 	t_vertex	up;
+	t_vertex	right;
 
-	up.x = cos(0) * sin(3.14);
-	up.y = sin(0);
-	up.z = cos(0) * cos(3.14);
+	right.x = sin(d->angle_horizontal - (3.14 / 2.0));
+	right.y = 0;
+	right.z = cos(d->angle_horizontal - (3.14 / 2.0));
+	up = ft_cross(d->camera_look, right);
+	d->camera_pos.x -= up.x * deltatime * 3;
+	d->camera_pos.y -= up.y * deltatime * 3;
+	d->camera_pos.z -= up.z * deltatime * 3;
+	return (1);
+}
+
+int		ft_down(t_data *d, double deltatime)
+{
+	t_vertex	up;
+	t_vertex	right;
+
+	right.x = sin(d->angle_horizontal - (3.14 / 2.0));
+	right.y = 0;
+	right.z = cos(d->angle_horizontal - (3.14 / 2.0));
+	up = ft_cross(d->camera_look, right);
 	d->camera_pos.x += up.x * deltatime * 3;
 	d->camera_pos.y += up.y * deltatime * 3;
 	d->camera_pos.z += up.z * deltatime * 3;
-}
-
-void		ft_down(t_data *d, float deltatime)
-{
-	t_vertex	down;
-
-	down.x = cos(0) * sin(3.14);
-	down.y = sin(0);
-	down.z = cos(0) * cos(3.14);
-	d->camera_pos.x -= down.x * deltatime * 3;
-	d->camera_pos.y -= down.y * deltatime * 3;
-	d->camera_pos.z -= down.z * deltatime * 3;
+	return (1);
 }

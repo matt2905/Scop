@@ -6,7 +6,7 @@
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/06 16:16:04 by mmartin           #+#    #+#             */
-/*   Updated: 2016/01/19 20:35:52 by mmartin          ###   ########.fr       */
+/*   Updated: 2016/01/21 20:09:30 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include <string.h>
 # include <OpenGL/gl3.h>
+# define GLFW_INCLUDE_NONE
+# include <GLFW/glfw3.h>
 
 # define WIDTH	1024
 # define HEIGHT	1024
@@ -92,8 +94,7 @@ typedef struct	s_obj
 
 typedef struct	s_data
 {
-	void		*mlx;
-	void		*win;
+	GLFWwindow	*win;
 	t_mat		*mat;
 	t_obj		*objs;
 	int			nb_mat;
@@ -114,27 +115,68 @@ typedef struct	s_data
 	float		*v;
 	size_t		size;
 	float		*mvp;
+	float		angle_horizontal;
+	float		angle_vertical;
+	float		fov;
+	float		speed;
+	float		mouse_speed;
 }				t_data;
+
+/*
+**	Structure for array of pointer of function
+*/
+
+typedef struct	s_key
+{
+	int			key;
+	int			(*func)(t_data *, double);
+}				t_key;
 
 t_data			*ft_parse(char *file);
 
+/*
+**		srcs/ft_vector.c
+*/
+
 t_vertex		ft_vector_min(t_vertex a, t_vertex b);
+t_vertex		ft_vector_add(t_vertex a, t_vertex b);
 t_vertex		ft_float_to_vector(float *src);
 t_vertex		ft_cross(t_vertex a, t_vertex b);
+
+/*
+**		srcs/ft_vector_tool.c
+*/
+
 void			ft_normalize_vector(t_vertex *src);
 float			ft_dot(t_vertex a, t_vertex b);
 
-void			ft_right(t_data *d, float deltatime);
-void			ft_left(t_data *d, float deltatime);
-void			ft_up(t_data *d, float deltatime);
-void			ft_down(t_data *d, float deltatime);
+/*
+**		srcs/ft_matrix.c
+*/
+
+float			*ft_new_matrix(void);
 
 /*
-**	ft_mlx_event.c
+**		srcs/ft_matrix_cal.c
 */
-int				ft_key_press(int keycode, t_data *d);
-int				ft_expose(t_data *d);
-int				ft_loop_hook(t_data *d);
+
+float			*ft_look_at(t_vertex e, t_vertex c, t_vertex u);
+float			*ft_mult_matrix(float *a, float *b);
+
+/*
+**		srcs/ft_event.c
+*/
+int				ft_event(t_data *d);
+void			ft_render(t_data *d);
+
+int				ft_escape(t_data *d, double deltatime);
+int				ft_right(t_data *d, double deltatime);
+int				ft_left(t_data *d, double deltatime);
+int				ft_up(t_data *d, double deltatime);
+int				ft_down(t_data *d, double deltatime);
+int				ft_forward(t_data *d, double deltatime);
+int				ft_backward(t_data *d, double deltatime);
+
 void			ft_init(t_data *d);
 void			ft_set_perspective(t_data *d);
 void			ft_create_objects(t_data *d);

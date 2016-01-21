@@ -6,7 +6,7 @@
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/10 10:53:50 by mmartin           #+#    #+#             */
-/*   Updated: 2016/01/19 19:11:31 by mmartin          ###   ########.fr       */
+/*   Updated: 2016/01/21 15:29:21 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,7 @@ static void		ft_create_object(t_data *d, t_obj o, int *begin)
 		j = 0;
 		while (++j < o.f[i][0].len)
 		{
-			if (o.name)
-				tmp = o.f[i][j].iv - 1;
-			else
-				tmp = o.f[i][j].iv - 2;
+			tmp = o.f[i][j].iv - 1;
 			tmp = (tmp > 0 ? tmp : tmp + 1);
 			d->v[index] = o.v[tmp].x;
 			d->v[index + 1] = o.v[tmp].y;
@@ -89,7 +86,6 @@ static void		ft_init_object_opengl(t_data *d)
 	glBindBuffer(GL_ARRAY_BUFFER, d->cid);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(*d->v) * d->size,
 			d->v, GL_STATIC_DRAW);
-
 }
 
 void			ft_create_objects(t_data *d)

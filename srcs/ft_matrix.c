@@ -6,7 +6,7 @@
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/10 09:27:32 by mmartin           #+#    #+#             */
-/*   Updated: 2016/01/19 16:16:39 by mmartin          ###   ########.fr       */
+/*   Updated: 2016/01/21 20:16:00 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,71 +19,11 @@ float	*ft_new_matrix(void)
 	float	*new;
 
 	if (!(new = (float *)ft_memalloc(sizeof(*new) * 16)))
-	{
 		return (NULL);
-	}
 	return (new);
 }
 
-float	*ft_mult_matrix(float *a, float *b)
-{
-	float	*ret;
-
-	ret = ft_new_matrix();
-	ret[0] = a[0] * b[0] + a[1] * b[4] + a[2] * b[8] + a[3] * b[12];
-	ret[1] = a[0] * b[1] + a[1] * b[5] + a[2] * b[9] + a[3] * b[13];
-	ret[2] = a[0] * b[2] + a[1] * b[6] + a[2] * b[10] + a[3] * b[14];
-	ret[3] = a[0] * b[3] + a[1] * b[7] + a[2] * b[11] + a[3] * b[15];
-	ret[4] = a[4] * b[0] + a[5] * b[4] + a[6] * b[8] + a[7] * b[12];
-	ret[5] = a[4] * b[1] + a[5] * b[5] + a[6] * b[9] + a[7] * b[13];
-	ret[6] = a[4] * b[2] + a[5] * b[6] + a[6] * b[10] + a[7] * b[14];
-	ret[7] = a[4] * b[3] + a[5] * b[7] + a[6] * b[11] + a[7] * b[15];
-	ret[8] = a[8] * b[0] + a[9] * b[4] + a[10] * b[8] + a[11] * b[12];
-	ret[9] = a[8] * b[1] + a[9] * b[5] + a[10] * b[9] + a[11] * b[13];
-	ret[10] = a[8] * b[2] + a[9] * b[6] + a[10] * b[10] + a[11] * b[14];
-	ret[11] = a[8] * b[3] + a[9] * b[7] + a[10] * b[11] + a[11] * b[15];
-	ret[12] = a[12] * b[0] + a[13] * b[4] + a[14] * b[8] + a[15] * b[12];
-	ret[13] = a[12] * b[1] + a[13] * b[5] + a[14] * b[9] + a[15] * b[13];
-	ret[14] = a[12] * b[2] + a[13] * b[6] + a[14] * b[10] + a[15] * b[14];
-	ret[15] = a[12] * b[3] + a[13] * b[7] + a[14] * b[11] + a[15] * b[15];
-	return (ret);
-}
-
-float	*ft_view(t_vertex eye, t_vertex center, t_vertex up)
-{
-	float		*view;
-	t_vertex	x;
-	t_vertex	y;
-	t_vertex	z;
-
-	view = ft_new_matrix();
-	z = ft_vector_min(eye, center);
-	ft_normalize_vector(&z);
-	y = up;
-	x = ft_cross(y, z);
-	y = ft_cross(z, x);
-	ft_normalize_vector(&x);
-	ft_normalize_vector(&y);
-	view[0] = x.x;
-	view[1] = y.x;
-	view[2] = z.x;
-	view[3] = (ft_dot(x, eye));
-	view[4] = x.y;
-	view[5] = y.y;
-	view[6] = z.y;
-	view[7] = (ft_dot(y, eye));
-	view[8] = x.z;
-	view[9] = y.z;
-	view[10] = z.z;
-	view[11] = 0;
-	view[12] = -0.0;
-	view[13] = -0.0;
-	view[14] = -(ft_dot(z, eye));
-	view[15] = 1;
-	return (view);
-}
-
-float	*ft_identity()
+float	*ft_identity(void)
 {
 	float	*identity;
 
@@ -140,8 +80,10 @@ void	ft_set_perspective(t_data *d)
 	float		*model;
 	float		*tmp;
 
-	projection = ft_projection(45, (float)WIDTH / (float)HEIGHT, 0.1, 100);
-	view = ft_view(d->camera_pos, d->camera_look, d->camera_up);
+	projection = ft_projection(d->fov, (float)WIDTH / (float)HEIGHT, 0.1, 100);
+	view = ft_look_at(d->camera_pos,
+			ft_vector_add(d->camera_pos, d->camera_look),
+			d->camera_up);
 	model = ft_identity();
 	tmp = ft_mult_matrix(view, projection);
 	d->mvp = ft_mult_matrix(model, tmp);

@@ -6,12 +6,10 @@
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/06 14:11:07 by mmartin           #+#    #+#             */
-/*   Updated: 2016/01/19 16:21:40 by mmartin          ###   ########.fr       */
+/*   Updated: 2016/01/21 20:09:44 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <mlx.h>
-#include <mlx_opengl.h>
 #include "libft.h"
 #include "ft_scop.h"
 
@@ -26,28 +24,47 @@ static int		ft_usage(char *cmd)
 static void		ft_init_opengl(void)
 {
 	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
-//	glClearDepth(1.0f);
-//	glDisable(GL_BLEND);
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);
-//	glDepthFunc(GL_LEQUAL);
-//	glEnable(GL_CULL_FACE);
-//	glFrontFace(GL_CCW);
-//	glCullFace(GL_BACK);
+}
+
+static void		ft_loop(t_data *d)
+{
+	short		okay;
+
+	okay = 1;
+	while (okay)
+	{
+		ft_set_perspective(d);
+		ft_render(d);
+		glfwSwapBuffers(d->win);
+		glfwPollEvents();
+		okay = ft_event(d);
+	}
+	glfwDestroyWindow(d->win);
+	glfwTerminate();
 }
 
 static int		ft_init_mlx(t_data *d)
 {
-	if ((d->mlx = mlx_init()) == NULL)
+	if (!glfwInit())
 		return (1);
-	d->win = mlx_new_opengl_window(d->mlx, WIDTH, HEIGHT, "Scop by mmartin");
-	mlx_opengl_window_set_context(d->win);
+	glfwWindowHint(GLFW_SAMPLES, 4);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
+	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+	d->win = glfwCreateWindow(WIDTH, HEIGHT, "Scop by mmartin", NULL, NULL);
+	if (!d->win)
+		return (1);
+	glfwMakeContextCurrent(d->win);
+	glfwSetInputMode(d->win, GLFW_STICKY_KEYS, GL_TRUE);
+	glfwSetInputMode(d->win, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	glfwPollEvents();
+	glfwSetCursorPos(d->win, WIDTH / 2.0, HEIGHT / 2.0);
 	ft_init_opengl();
 	ft_init(d);
-	mlx_expose_hook(d->win, &ft_expose, d);
-	mlx_hook(d->win, 2, 0, ft_key_press, d);
-	mlx_loop_hook(d->mlx, &ft_loop_hook, d);
-	mlx_loop(d->mlx);
+	ft_loop(d);
 	return (0);
 }
 

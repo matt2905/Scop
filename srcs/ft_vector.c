@@ -6,7 +6,7 @@
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/19 13:08:31 by mmartin           #+#    #+#             */
-/*   Updated: 2016/01/19 13:32:40 by mmartin          ###   ########.fr       */
+/*   Updated: 2016/01/21 17:14:46 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,18 +43,12 @@ t_vertex	ft_vector_min(t_vertex a, t_vertex b)
 	return (ret);
 }
 
-void		ft_normalize_vector(t_vertex *src)
+t_vertex	ft_vector_add(t_vertex a, t_vertex b)
 {
-	float		norme;
+	t_vertex	ret;
 
-	norme = (*src).x * (*src).x + (*src).y * (*src).y + (*src).z * (*src).z;
-	norme = fabs(sqrt(norme));
-	(*src).x = (*src).x / norme;
-	(*src).y = (*src).y / norme;
-	(*src).z = (*src).z / norme;
-}
-
-float		ft_dot(t_vertex a, t_vertex b)
-{
-	return (a.x * b.x + a.y * b.y + a.z * b.z);
+	ret.x = a.x + b.x;
+	ret.y = a.y + b.y;
+	ret.z = a.z + b.z;
+	return (ret);
 }
