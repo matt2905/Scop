@@ -6,7 +6,7 @@
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/19 13:08:31 by mmartin           #+#    #+#             */
-/*   Updated: 2016/01/21 17:14:46 by mmartin          ###   ########.fr       */
+/*   Updated: 2016/01/22 12:33:30 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,14 @@ t_vertex	ft_vector_add(t_vertex a, t_vertex b)
 	ret.y = a.y + b.y;
 	ret.z = a.z + b.z;
 	return (ret);
+}
+
+t_vertex	ft_vector_neg(t_vertex src)
+{
+	t_vertex	dst;
+
+	dst.x = -src.x;
+	dst.y = -src.y;
+	dst.z = -src.z;
+	return (dst);
 }

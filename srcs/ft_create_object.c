@@ -6,7 +6,7 @@
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/10 10:53:50 by mmartin           #+#    #+#             */
-/*   Updated: 2016/01/21 15:29:21 by mmartin          ###   ########.fr       */
+/*   Updated: 2016/01/22 13:55:17 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void		ft_create_object(t_data *d, t_obj o, int *begin)
 		while (++j < o.f[i][0].len)
 		{
 			tmp = o.f[i][j].iv - 1;
-			tmp = (tmp > 0 ? tmp : tmp + 1);
+			tmp = (tmp >= 0 ? tmp : 0);
 			d->v[index] = o.v[tmp].x;
 			d->v[index + 1] = o.v[tmp].y;
 			d->v[index + 2] = o.v[tmp].z;

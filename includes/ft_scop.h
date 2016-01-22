@@ -6,7 +6,7 @@
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/06 16:16:04 by mmartin           #+#    #+#             */
-/*   Updated: 2016/01/21 20:09:30 by mmartin          ###   ########.fr       */
+/*   Updated: 2016/01/22 12:46:54 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,6 @@ typedef struct	s_data
 	GLuint		program;
 	GLuint		vid;
 	GLuint		cid;
-	GLuint		mid;
 	GLuint		camera_pos_loc;
 	GLuint		light_pos_loc;
 	GLuint		light_col_loc;
@@ -114,12 +113,18 @@ typedef struct	s_data
 	float		light_col[3];
 	float		*v;
 	size_t		size;
-	float		*mvp;
+	GLuint		proj_id;
+	float		*projection;
+	GLuint		view_id;
+	float		*view;
+	GLuint		mode_id;
+	float		*model;
 	float		angle_horizontal;
 	float		angle_vertical;
 	float		fov;
 	float		speed;
 	float		mouse_speed;
+	float		last_time;
 }				t_data;
 
 /*
@@ -140,6 +145,7 @@ t_data			*ft_parse(char *file);
 
 t_vertex		ft_vector_min(t_vertex a, t_vertex b);
 t_vertex		ft_vector_add(t_vertex a, t_vertex b);
+t_vertex		ft_vector_neg(t_vertex src);
 t_vertex		ft_float_to_vector(float *src);
 t_vertex		ft_cross(t_vertex a, t_vertex b);
 
@@ -149,6 +155,7 @@ t_vertex		ft_cross(t_vertex a, t_vertex b);
 
 void			ft_normalize_vector(t_vertex *src);
 float			ft_dot(t_vertex a, t_vertex b);
+void			ft_search_center(t_data *d, t_vertex *center);
 
 /*
 **		srcs/ft_matrix.c
@@ -160,6 +167,7 @@ float			*ft_new_matrix(void);
 **		srcs/ft_matrix_cal.c
 */
 
+float			*ft_translate(t_vertex center);
 float			*ft_look_at(t_vertex e, t_vertex c, t_vertex u);
 float			*ft_mult_matrix(float *a, float *b);
 

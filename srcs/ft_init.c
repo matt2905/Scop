@@ -6,7 +6,7 @@
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/10 10:04:19 by mmartin           #+#    #+#             */
-/*   Updated: 2016/01/21 14:52:56 by mmartin          ###   ########.fr       */
+/*   Updated: 2016/01/22 12:45:28 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ static void	ft_init_scene(t_data *d)
 
 	glGenVertexArrays(1, &vid);
 	glBindVertexArray(vid);
-	d->mid = glGetUniformLocation(d->program, "MVP");
+	d->mode_id = glGetUniformLocation(d->program, "model");
+	d->view_id = glGetUniformLocation(d->program, "view");
+	d->proj_id = glGetUniformLocation(d->program, "projection");
 	d->camera_pos.x = 0;
 	d->camera_pos.y = 0;
 	d->camera_pos.z = 5;
@@ -33,6 +35,7 @@ static void	ft_init_scene(t_data *d)
 	d->fov = 45;
 	d->speed = 3;
 	d->mouse_speed = 0.005;
+	d->last_time = glfwGetTime();
 	ft_set_perspective(d);
 	ft_create_objects(d);
 }

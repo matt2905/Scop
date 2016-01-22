@@ -6,7 +6,7 @@
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/21 13:35:07 by mmartin           #+#    #+#             */
-/*   Updated: 2016/01/21 19:23:35 by mmartin          ###   ########.fr       */
+/*   Updated: 2016/01/22 12:51:37 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,9 @@ void	ft_render(t_data *d)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glUseProgram(d->program);
-	glUniformMatrix4fv(d->mid, 1, GL_FALSE, &d->mvp[0]);
+	glUniformMatrix4fv(d->mode_id, 1, GL_FALSE, &d->model[0]);
+	glUniformMatrix4fv(d->view_id, 1, GL_FALSE, &d->view[0]);
+	glUniformMatrix4fv(d->proj_id, 1, GL_FALSE, &d->projection[0]);
 	glEnableVertexAttribArray(0);
 	glEnableVertexAttribArray(1);
 	glBindBuffer(GL_ARRAY_BUFFER, d->vid);
@@ -57,20 +59,17 @@ void	ft_compute_mouse(t_data *d)
 
 int		ft_event(t_data *d)
 {
-	static float	last_time;
 	float			delta_time;
 	double			x;
 	double			y;
 	int				i;
 
-	if (last_time == 0)
-		last_time = glfwGetTime();
 	glfwGetCursorPos(d->win, &x, &y);
 	glfwSetCursorPos(d->win, (float)WIDTH / 2.0, (float)HEIGHT / 2.0);
 	d->angle_horizontal += d->mouse_speed * ((float)WIDTH / 2.0 - x);
 	d->angle_vertical += d->mouse_speed * ((float)HEIGHT / 2.0 - y);
-	delta_time = glfwGetTime() - last_time;
-	last_time = glfwGetTime();
+	delta_time = glfwGetTime() - d->last_time;
+	d->last_time = glfwGetTime();
 	i = -1;
 	ft_compute_mouse(d);
 	while (++i < 7)

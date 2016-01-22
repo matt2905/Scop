@@ -6,7 +6,7 @@
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/21 17:15:41 by mmartin           #+#    #+#             */
-/*   Updated: 2016/01/21 17:22:47 by mmartin          ###   ########.fr       */
+/*   Updated: 2016/01/22 11:08:55 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,30 @@ float			*ft_mult_matrix(float *a, float *b)
 	ret[13] = a[12] * b[1] + a[13] * b[5] + a[14] * b[9] + a[15] * b[13];
 	ret[14] = a[12] * b[2] + a[13] * b[6] + a[14] * b[10] + a[15] * b[14];
 	ret[15] = a[12] * b[3] + a[13] * b[7] + a[14] * b[11] + a[15] * b[15];
+	return (ret);
+}
+
+float			*ft_translate(t_vertex center)
+{
+	float		*ret;
+
+	ret = ft_new_matrix();
+	ret[0] = 1;
+	ret[1] = 0;
+	ret[2] = 0;
+	ret[3] = center.x;
+	ret[4] = 0;
+	ret[5] = 1;
+	ret[6] = 0;
+	ret[7] = center.y;
+	ret[8] = 0;
+	ret[9] = 0;
+	ret[10] = 1;
+	ret[11] = center.z;
+	ret[12] = 0;
+	ret[13] = 0;
+	ret[14] = 0;
+	ret[15] = 1;
 	return (ret);
 }
 
