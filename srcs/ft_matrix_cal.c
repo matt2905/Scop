@@ -6,7 +6,7 @@
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/21 17:15:41 by mmartin           #+#    #+#             */
-/*   Updated: 2016/01/22 11:08:55 by mmartin          ###   ########.fr       */
+/*   Updated: 2016/01/22 15:41:51 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,18 +44,18 @@ float			*ft_translate(t_vertex center)
 	ret[0] = 1;
 	ret[1] = 0;
 	ret[2] = 0;
-	ret[3] = center.x;
+	ret[3] = 0;//center.x;
 	ret[4] = 0;
 	ret[5] = 1;
 	ret[6] = 0;
-	ret[7] = center.y;
+	ret[7] = 0;//center.y;
 	ret[8] = 0;
 	ret[9] = 0;
 	ret[10] = 1;
-	ret[11] = center.z;
-	ret[12] = 0;
-	ret[13] = 0;
-	ret[14] = 0;
+	ret[11] = 0;//center.z;
+	ret[12] = center.x;
+	ret[13] = center.y;
+	ret[14] = center.z;
 	ret[15] = 1;
 	return (ret);
 }

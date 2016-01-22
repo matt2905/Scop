@@ -6,7 +6,7 @@
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/10 09:27:32 by mmartin           #+#    #+#             */
-/*   Updated: 2016/01/22 15:22:36 by mmartin          ###   ########.fr       */
+/*   Updated: 2016/01/22 15:55:00 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,9 +103,8 @@ void	ft_set_perspective(t_data *d)
 {
 	static float	angle;
 	t_vertex		center;
-	//float			*ptr;
-	//float			*tmp;
-	//float			*rotate;
+	float			*ptr;
+	float			*rotate;
 
 	angle += 3.14 * (glfwGetTime() - d->last_time) * 1000;
 	d->projection = ft_projection(d->fov,
@@ -114,15 +113,10 @@ void	ft_set_perspective(t_data *d)
 			ft_vector_add(d->camera_pos, d->camera_look),
 			d->camera_up);
 	ft_search_center(d, &center);
-	//ptr = ft_translate(center);
-	d->model = ft_rotate_y(angle);
-	//rotate = ft_rotate_y(angle);
-	//tmp = ft_mult_matrix(ptr, rotate);
-	//ft_memdel((void **)&ptr);
-	//center = ft_vector_neg(center);
-	//ptr = ft_translate(center);
-	//d->model = ft_mult_matrix(ptr, tmp);
-	//ft_memdel((void **)&ptr);
-	//ft_memdel((void **)&tmp);
-	//ft_memdel((void **)&rotate);
+	center = ft_vector_neg(center);
+	ptr = ft_translate(center);
+	rotate = ft_rotate_y(angle);
+	d->model = ft_mult_matrix(ptr, rotate);
+	ft_memdel((void **)&ptr);
+	ft_memdel((void **)&rotate);
 }
