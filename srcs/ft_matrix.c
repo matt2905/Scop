@@ -6,7 +6,7 @@
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/10 09:27:32 by mmartin           #+#    #+#             */
-/*   Updated: 2016/01/22 15:55:00 by mmartin          ###   ########.fr       */
+/*   Updated: 2016/01/25 18:25:21 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,9 @@ void	ft_set_perspective(t_data *d)
 	float			*ptr;
 	float			*rotate;
 
-	angle += 3.14 * (glfwGetTime() - d->last_time) * 1000;
+	angle += 0.05;
+	if (angle >= 360)
+		angle = 0;
 	d->projection = ft_projection(d->fov,
 			(float)WIDTH / (float)HEIGHT, 0.1, 100);
 	d->view = ft_look_at(d->camera_pos,
