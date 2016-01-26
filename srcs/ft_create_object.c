@@ -6,7 +6,7 @@
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/10 10:53:50 by mmartin           #+#    #+#             */
-/*   Updated: 2016/01/22 13:55:17 by mmartin          ###   ########.fr       */
+/*   Updated: 2016/01/26 13:48:07 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,12 +80,8 @@ static void		ft_init_object_opengl(t_data *d)
 {
 	glGenBuffers(1, &d->vid);
 	glBindBuffer(GL_ARRAY_BUFFER, d->vid);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(*d->v) * d->size,
-			d->v, GL_STATIC_DRAW);
-	glGenBuffers(1, &d->cid);
-	glBindBuffer(GL_ARRAY_BUFFER, d->cid);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(*d->v) * d->size,
-			d->v, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(*d->v) * d->size_v,
+			&d->v[0], GL_STATIC_DRAW);
 }
 
 void			ft_create_objects(t_data *d)
@@ -96,8 +92,8 @@ void			ft_create_objects(t_data *d)
 	i = 0;
 	begin = 0;
 	d->v = NULL;
-	d->size = ft_get_size(d->objs, d->nb_obj);
-	d->v = (float *)ft_memalloc(sizeof(*d->v) * d->size);
+	d->size_v = ft_get_size(d->objs, d->nb_obj);
+	d->v = (float *)ft_memalloc(sizeof(*d->v) * d->size_v);
 	while (i < d->nb_obj)
 	{
 		ft_create_object(d, d->objs[i], &begin);

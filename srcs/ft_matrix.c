@@ -6,7 +6,7 @@
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/10 09:27:32 by mmartin           #+#    #+#             */
-/*   Updated: 2016/01/25 18:25:21 by mmartin          ###   ########.fr       */
+/*   Updated: 2016/01/26 13:50:09 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,32 +47,6 @@ float	*ft_projection(float fov, float aspect, float near, float far)
 	projection[14] = -(2 * far * near) / (far - near);
 	projection[15] = 0;
 	return (projection);
-}
-
-void	ft_min_center(t_data *d, t_vertex *center)
-{
-	float	x;
-	float	y;
-	float	z;
-	size_t	i;
-
-	x = 0;
-	y = 0;
-	z = 0;
-	i = 0;
-	while (i < d->size)
-	{
-		x += d->v[i];
-		y += d->v[i + 1];
-		z += d->v[i + 2];
-		i += 3;
-	}
-	x = x / (i / 3);
-	y = y / (i / 3);
-	z = z / (i / 3);
-	center->x = -x;
-	center->y = -y;
-	center->z = -z;
 }
 
 float	*ft_rotate_y(float theta)

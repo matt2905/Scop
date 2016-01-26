@@ -6,7 +6,7 @@
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/06 16:16:04 by mmartin           #+#    #+#             */
-/*   Updated: 2016/01/22 12:46:54 by mmartin          ###   ########.fr       */
+/*   Updated: 2016/01/26 11:03:59 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,14 @@ typedef struct	s_color
 typedef struct	s_mat
 {
 	char		*name;
+
 	float		ns;
 	t_color		ka;
 	t_color		kd;
 	t_color		ks;
 	float		ni;
 	float		d;
+
 	t_color		(*illum)();
 	char		*map_ka;
 	char		*map_kd;
@@ -81,50 +83,59 @@ typedef struct	s_face
 typedef struct	s_obj
 {
 	int			nb_v;
-	int			nb_vt;
-	int			nb_vn;
-	int			nb_f;
-	char		*name;
 	t_vertex	*v;
+
+	int			nb_vt;
 	t_vertex	*vt;
+
+	int			nb_vn;
 	t_vertex	*vn;
-	t_mat		m;
+
+	int			nb_f;
 	t_face		**f;
+
+	char		*name;
+	t_mat		m;
 }				t_obj;
 
 typedef struct	s_data
 {
 	GLFWwindow	*win;
-	t_mat		*mat;
-	t_obj		*objs;
-	int			nb_mat;
-	int			nb_obj;
 	GLuint		program;
-	GLuint		vid;
-	GLuint		cid;
-	GLuint		camera_pos_loc;
-	GLuint		light_pos_loc;
-	GLuint		light_col_loc;
+
+	t_mat		*mat;
+	int			nb_mat;
+	t_obj		*objs;
+	int			nb_obj;
+
 	float		rotate;
 	t_vertex	camera_pos;
 	t_vertex	camera_look;
 	t_vertex	camera_up;
+
 	float		light_pos[3];
 	float		light_col[3];
-	float		*v;
-	size_t		size;
+
 	GLuint		proj_id;
 	float		*projection;
 	GLuint		view_id;
 	float		*view;
 	GLuint		mode_id;
 	float		*model;
+
 	float		angle_horizontal;
 	float		angle_vertical;
 	float		fov;
 	float		speed;
 	float		mouse_speed;
 	float		last_time;
+
+	GLuint		vid;
+	float		*v;
+	size_t		size_v;
+	GLuint		iid;
+	size_t		*i;
+	size_t		size_i;
 }				t_data;
 
 /*
@@ -190,6 +201,7 @@ void			ft_set_perspective(t_data *d);
 void			ft_create_objects(t_data *d);
 GLuint			ft_get_shader(GLenum type, const char *file);
 void			ft_attach_shader(GLuint program, GLuint shader);
+void			ft_triangulate(t_data *d);
 
 void			ft_delete_obj(t_data *d);
 void			ft_delete_face(t_obj *o);
