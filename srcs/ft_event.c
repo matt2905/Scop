@@ -6,7 +6,7 @@
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/21 13:35:07 by mmartin           #+#    #+#             */
-/*   Updated: 2016/01/28 14:13:56 by mmartin          ###   ########.fr       */
+/*   Updated: 2016/01/29 13:51:08 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@ void	ft_render(t_data *d)
 	glBindBuffer(GL_ARRAY_BUFFER, d->vid);
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE,
-			6 * sizeof(float), (void *)0);
+			8 * sizeof(float), (void *)0);
 	glEnableVertexAttribArray(1);
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE,
-			6 * sizeof(float), (void *)(3 * sizeof(float)));
+			8 * sizeof(float), (void *)(3 * sizeof(float)));
 	glDrawArrays(GL_TRIANGLES, 0, d->size_v / 6);
 	glDisableVertexAttribArray(1);
 	glDisableVertexAttribArray(0);

@@ -6,7 +6,7 @@
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/08 10:44:59 by mmartin           #+#    #+#             */
-/*   Updated: 2016/01/19 19:18:45 by mmartin          ###   ########.fr       */
+/*   Updated: 2016/01/29 17:02:01 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,23 @@ static void		ft_loop_object(t_data *d, int fd, t_obj *new)
 	}
 }
 
+static void		ft_first_line(t_data *d, t_obj *new, char *tmp)
+{
+	char	**tab;
+	size_t	i;
+	size_t	len;
+
+	len = sizeof(g_parse) / sizeof(t_parse);
+	i = -1;
+	tab = ft_strsplit(tmp, ' ');
+	while (++i < len)
+	{
+		if (!ft_strcmp(g_parse[i].cmp, tab[0]))
+			g_parse[i].func(d, new, tab);
+	}
+	ft_tabdel(&tab);
+}
+
 static t_obj	ft_init_object(t_obj new)
 {
 	new.nb_v = 0;
@@ -82,5 +99,7 @@ void			ft_get_object(t_data *d, int fd, char *tmp)
 	d->objs = obj;
 	if (!ft_strncmp(tmp, "o ", 2))
 		d->objs[len - 1].name = ft_strdup(tmp + 2);
+	else
+		ft_first_line(d, &d->objs[len - 1], tmp);
 	ft_loop_object(d, fd, &d->objs[len - 1]);
 }

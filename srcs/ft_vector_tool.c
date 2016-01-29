@@ -6,7 +6,7 @@
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/21 16:52:47 by mmartin           #+#    #+#             */
-/*   Updated: 2016/01/22 15:54:13 by mmartin          ###   ########.fr       */
+/*   Updated: 2016/01/29 16:26:01 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,26 +31,24 @@ float		ft_dot(t_vertex a, t_vertex b)
 
 void		ft_search_center(t_data *d, t_vertex *center)
 {
-	float	x;
-	float	y;
-	float	z;
 	int		i;
+	int		j;
+	size_t	size;
 
-	x = 0;
-	y = 0;
-	z = 0;
-	i = 0;
-	while (i < d->objs[0].nb_v)
+	size = 0;
+	j = -1;
+	while (++j < d->nb_obj)
 	{
-		x += d->objs[0].v[i].x;
-		y += d->objs[0].v[i].y;
-		z += d->objs[0].v[i].z;
-		i++;
+		i = -1;
+		while (++i < d->objs[j].nb_v)
+		{
+			center->x += d->objs[j].v[i].x;
+			center->y += d->objs[j].v[i].y;
+			center->z += d->objs[j].v[i].z;
+			size++;
+		}
 	}
-	x = x / (float)i;
-	y = y / (float)i;
-	z = z / (float)i;
-	center->x = x;
-	center->y = y;
-	center->z = z;
+	center->x /= (float)size;
+	center->y /= (float)size;
+	center->z /= (float)size;
 }

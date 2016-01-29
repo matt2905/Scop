@@ -6,34 +6,12 @@
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/10 10:53:50 by mmartin           #+#    #+#             */
-/*   Updated: 2016/01/29 13:40:18 by mmartin          ###   ########.fr       */
+/*   Updated: 2016/01/29 13:50:48 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "ft_scop.h"
-
-static void		ft_create_object(t_data *d, t_obj o, int *begin)
-{
-	int			i;
-
-	i = -1;
-	while (++i < o.nb_f)
-	{
-		ft_cutt_triangle(d, begin, o, o.f[i]);
-/*		j = 0;
-		while (++j < o.f[i][0].len)
-		{
-			tmp = o.f[i][j].iv - 1;
-			tmp = (tmp >= 0 ? tmp : 0);
-			d->v[index] = o.v[tmp].x;
-			d->v[index + 1] = o.v[tmp].y;
-			d->v[index + 2] = o.v[tmp].z;
-			ft_genere_color(d, index);
-			index += 6;
-		}
-*/	}
-}
 
 static size_t	ft_get_size(t_obj *o, int len)
 {
@@ -55,7 +33,7 @@ static size_t	ft_get_size(t_obj *o, int len)
 		}
 		i++;
 	}
-	return (size * 6);
+	return (size * 8);
 }
 
 static void		ft_init_object_opengl(t_data *d)
@@ -69,17 +47,19 @@ static void		ft_init_object_opengl(t_data *d)
 void			ft_create_objects(t_data *d)
 {
 	int		i;
+	int		j;
 	int		begin;
 
-	i = 0;
+	i = -1;
 	begin = 0;
 	d->v = NULL;
 	d->size_v = ft_get_size(d->objs, d->nb_obj);
 	d->v = (float *)ft_memalloc(sizeof(*d->v) * d->size_v);
-	while (i < d->nb_obj)
+	while (++i < d->nb_obj)
 	{
-		ft_create_object(d, d->objs[i], &begin);
-		i++;
+		j = -1;
+		while (++j < d->objs[i].nb_f)
+			ft_cutt_triangle(d, &begin, d->objs[i], d->objs[i].f[j]);
 	}
 	if (!d->v)
 		return ;
