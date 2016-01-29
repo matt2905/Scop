@@ -6,7 +6,7 @@
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/10 10:04:19 by mmartin           #+#    #+#             */
-/*   Updated: 2016/01/22 12:45:28 by mmartin          ###   ########.fr       */
+/*   Updated: 2016/01/29 13:22:45 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,9 @@ static void	ft_init_scene(t_data *d)
 	d->mode_id = glGetUniformLocation(d->program, "model");
 	d->view_id = glGetUniformLocation(d->program, "view");
 	d->proj_id = glGetUniformLocation(d->program, "projection");
-	d->camera_pos.x = 0;
-	d->camera_pos.y = 0;
 	d->camera_pos.z = 5;
-	d->camera_up.x = 0;
 	d->camera_up.y = 1;
-	d->camera_up.z = 0;
 	d->angle_horizontal = 3.14;
-	d->angle_vertical = 0;
 	d->fov = 45;
 	d->speed = 3;
 	d->mouse_speed = 0.005;

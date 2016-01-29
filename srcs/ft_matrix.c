@@ -6,7 +6,7 @@
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/10 09:27:32 by mmartin           #+#    #+#             */
-/*   Updated: 2016/01/26 13:50:09 by mmartin          ###   ########.fr       */
+/*   Updated: 2016/01/28 14:29:15 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,11 +80,13 @@ void	ft_set_perspective(t_data *d)
 	float			*ptr;
 	float			*rotate;
 
-	angle += 0.05;
+	angle += 0.02;
 	if (angle >= 360)
 		angle = 0;
+	ft_memdel((void **)&d->projection);
 	d->projection = ft_projection(d->fov,
 			(float)WIDTH / (float)HEIGHT, 0.1, 100);
+	ft_memdel((void **)&d->view);
 	d->view = ft_look_at(d->camera_pos,
 			ft_vector_add(d->camera_pos, d->camera_look),
 			d->camera_up);
@@ -92,6 +94,7 @@ void	ft_set_perspective(t_data *d)
 	center = ft_vector_neg(center);
 	ptr = ft_translate(center);
 	rotate = ft_rotate_y(angle);
+	ft_memdel((void **)&d->model);
 	d->model = ft_mult_matrix(ptr, rotate);
 	ft_memdel((void **)&ptr);
 	ft_memdel((void **)&rotate);
