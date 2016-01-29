@@ -6,44 +6,22 @@
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/10 10:53:50 by mmartin           #+#    #+#             */
-/*   Updated: 2016/01/29 12:17:02 by mmartin          ###   ########.fr       */
+/*   Updated: 2016/01/29 13:40:18 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "ft_scop.h"
 
-static const float	g_color[3][3] =
-{
-	{1.0f, 0.0f, 0.0f},
-	{0.0f, 1.0f, 0.0f},
-	{0.0f, 0.0f, 1.0f},
-};
-
-static void		ft_genere_color(t_data *d, int index)
-{
-	static int	i = 0;
-
-	if (i >= 3)
-		i = 0;
-	d->v[index + 3] = g_color[i][0];
-	d->v[index + 4] = g_color[i][1];
-	d->v[index + 5] = g_color[i][2];
-	i++;
-}
-
 static void		ft_create_object(t_data *d, t_obj o, int *begin)
 {
-	int			index;
 	int			i;
-	unsigned	j;
-	int			tmp;
 
-	index = *begin;
 	i = -1;
 	while (++i < o.nb_f)
 	{
-		j = 0;
+		ft_cutt_triangle(d, begin, o, o.f[i]);
+/*		j = 0;
 		while (++j < o.f[i][0].len)
 		{
 			tmp = o.f[i][j].iv - 1;
@@ -54,8 +32,7 @@ static void		ft_create_object(t_data *d, t_obj o, int *begin)
 			ft_genere_color(d, index);
 			index += 6;
 		}
-	}
-	*begin = index;
+*/	}
 }
 
 static size_t	ft_get_size(t_obj *o, int len)

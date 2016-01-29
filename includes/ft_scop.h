@@ -6,7 +6,7 @@
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/06 16:16:04 by mmartin           #+#    #+#             */
-/*   Updated: 2016/01/29 13:22:16 by mmartin          ###   ########.fr       */
+/*   Updated: 2016/01/29 13:38:47 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,7 +201,7 @@ void			ft_set_perspective(t_data *d);
 void			ft_create_objects(t_data *d);
 GLuint			ft_get_shader(GLenum type, const char *file);
 void			ft_attach_shader(GLuint program, GLuint shader);
-void			ft_triangulate(t_data *d);
+void			ft_cutt_triangle(t_data *d, int *i, t_obj o, t_face *f);
 
 void			ft_delete_obj(t_data *d);
 void			ft_delete_face(t_obj *o);

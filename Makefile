@@ -6,7 +6,7 @@
 #    By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/06/06 14:10:02 by mmartin           #+#    #+#              #
-#    Updated: 2016/01/29 12:18:33 by mmartin          ###   ########.fr        #
+#    Updated: 2016/01/29 13:36:40 by mmartin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ DOBJ		=	obj/
 
 SRC			=	srcs/main.c					\
 				srcs/ft_create_object.c		\
+				srcs/ft_cutt_triangle.c		\
 				srcs/ft_delete_object.c		\
 				srcs/ft_event.c				\
 				srcs/ft_get_fragments.c		\
