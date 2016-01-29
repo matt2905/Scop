@@ -6,7 +6,7 @@
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/29 13:28:21 by mmartin           #+#    #+#             */
-/*   Updated: 2016/01/29 14:07:41 by mmartin          ###   ########.fr       */
+/*   Updated: 2016/01/29 19:58:14 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void			ft_cutt_triangle(t_data *d, int *index, t_obj o, t_face *f)
 	while (++i < f[0].len - 2)
 	{
 		v = o.v[f[i].iv - 1];
-		vt = ((int)f[i].ivt - 1 >= 0? o.vt[f[i].ivt - 1] : ft_def());
+		vt = ((int)f[i].ivt - 1 >= 0 ? o.vt[f[i].ivt - 1] : ft_def());
 		ft_push_triangle(d, v, vt, index);
 		v = o.v[f[i + 1].iv - 1];
 		vt = ((int)f[i + 1].ivt - 1 >= 0 ? o.vt[f[i + 1].ivt - 1] : ft_def());
