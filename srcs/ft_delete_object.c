@@ -6,21 +6,21 @@
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/08 11:00:30 by mmartin           #+#    #+#             */
-/*   Updated: 2015/06/08 12:29:10 by mmartin          ###   ########.fr       */
+/*   Updated: 2016/02/01 10:17:53 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "ft_scop.h"
 
-void	ft_delete_face(t_obj *o)
+static void	ft_delete_face(t_obj *o)
 {
 	int		y;
 
 	y = 0;
 	if (!o->f)
 		return ;
-	while (o->f[y])
+	while (y < o->nb_f)
 	{
 		ft_memdel((void **)&o->f[y]);
 		y++;
@@ -28,7 +28,7 @@ void	ft_delete_face(t_obj *o)
 	ft_memdel((void **)&o->f);
 }
 
-void	ft_delete_obj(t_data *d)
+void		ft_delete_obj(t_data *d)
 {
 	int		i;
 

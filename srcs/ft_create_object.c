@@ -6,7 +6,7 @@
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/10 10:53:50 by mmartin           #+#    #+#             */
-/*   Updated: 2016/01/29 19:56:46 by mmartin          ###   ########.fr       */
+/*   Updated: 2016/02/01 10:28:05 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,12 @@ static void		ft_init_object_opengl(t_data *d)
 	glBindBuffer(GL_ARRAY_BUFFER, d->vid);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(*d->v) * d->size_v,
 			&d->v[0], GL_STATIC_DRAW);
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE,
+			8 * sizeof(float), NULL);
+	glEnableVertexAttribArray(1);
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE,
+			8 * sizeof(float), (void *)(3 * sizeof(float)));
 }
 
 void			ft_create_objects(t_data *d)

@@ -6,7 +6,7 @@
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/06 14:11:07 by mmartin           #+#    #+#             */
-/*   Updated: 2016/01/28 16:13:14 by mmartin          ###   ########.fr       */
+/*   Updated: 2016/02/01 11:04:04 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ static void		ft_loop(t_data *d)
 	okay = 1;
 	while (okay)
 	{
+		glfwSwapBuffers(d->win);
 		ft_set_perspective(d);
 		ft_render(d);
-		glfwSwapBuffers(d->win);
 		glfwPollEvents();
 		okay = ft_event(d);
 	}

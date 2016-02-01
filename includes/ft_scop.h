@@ -6,7 +6,7 @@
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/06 16:16:04 by mmartin           #+#    #+#             */
-/*   Updated: 2016/01/29 13:38:47 by mmartin          ###   ########.fr       */
+/*   Updated: 2016/02/01 10:21:17 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,20 +48,13 @@ typedef struct	s_color
 typedef struct	s_mat
 {
 	char		*name;
-
 	float		ns;
 	t_color		ka;
 	t_color		kd;
 	t_color		ks;
 	float		ni;
 	float		d;
-
 	t_color		(*illum)();
-	char		*map_ka;
-	char		*map_kd;
-	char		*map_ks;
-	char		*map_ns;
-	char		*map_d;
 }				t_mat;
 
 typedef struct	s_face
@@ -113,9 +106,6 @@ typedef struct	s_data
 	t_vertex	camera_look;
 	t_vertex	camera_up;
 
-	float		light_pos[3];
-	float		light_col[3];
-
 	GLuint		proj_id;
 	float		*projection;
 	GLuint		view_id;
@@ -133,9 +123,6 @@ typedef struct	s_data
 	GLuint		vid;
 	float		*v;
 	size_t		size_v;
-	GLuint		iid;
-	size_t		*i;
-	size_t		size_i;
 }				t_data;
 
 /*
@@ -204,7 +191,6 @@ void			ft_attach_shader(GLuint program, GLuint shader);
 void			ft_cutt_triangle(t_data *d, int *i, t_obj o, t_face *f);
 
 void			ft_delete_obj(t_data *d);
-void			ft_delete_face(t_obj *o);
 
 /*
 **	function for parse materials
