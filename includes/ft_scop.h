@@ -6,7 +6,7 @@
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/06 16:16:04 by mmartin           #+#    #+#             */
-/*   Updated: 2016/02/01 12:34:15 by mmartin          ###   ########.fr       */
+/*   Updated: 2016/02/01 17:03:27 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,16 @@ typedef struct	s_color
 	float		g;
 	float		b;
 }				t_color;
+
+typedef struct	s_tex_tga
+{
+	GLubyte		type;
+	GLubyte		bit_count;
+	short		width;
+	short		height;
+	GLubyte		*data;
+	GLuint		texID;
+}				t_tex_tga;
 
 /*
 **	ns : material specular exponent is multiplied by the texture value
@@ -127,6 +137,9 @@ typedef struct	s_data
 	float		mouse_speed;
 	float		last_time;
 
+	GLuint		texid;
+	t_tex_tga	texture;
+
 	GLuint		vid;
 	float		*v;
 	size_t		size_v;
@@ -198,6 +211,7 @@ void			ft_attach_shader(GLuint program, GLuint shader);
 void			ft_cutt_triangle(t_data *d, int *i, t_obj o, t_face *f);
 
 void			ft_delete_obj(t_data *d);
+void			ft_load_tga(t_data *d);
 
 /*
 **	function for parse materials
@@ -217,6 +231,11 @@ void			ft_get_diffuse(t_data *d, int *i, char **tab);
 void			ft_get_specular(t_data *d, int *i, char **tab);
 void			ft_get_density(t_data *d, int *i, char **tab);
 void			ft_get_transparency(t_data *d, int *i, char **tab);
+void			ft_get_map_ka(t_data *d, int *i, char **tab);
+void			ft_get_map_kd(t_data *d, int *i, char **tab);
+void			ft_get_map_ks(t_data *d, int *i, char **tab);
+void			ft_get_map_ns(t_data *d, int *i, char **tab);
+void			ft_get_map_d(t_data *d, int *i, char **tab);
 
 void			ft_get_light_calc(t_data *d, int *i, char **tab);
 

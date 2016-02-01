@@ -6,7 +6,7 @@
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/06 14:11:07 by mmartin           #+#    #+#             */
-/*   Updated: 2016/02/01 11:04:04 by mmartin          ###   ########.fr       */
+/*   Updated: 2016/02/01 15:31:34 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ static void		ft_loop(t_data *d)
 	short		okay;
 
 	okay = 1;
+	ft_load_tga(d);
 	while (okay)
 	{
 		glfwSwapBuffers(d->win);

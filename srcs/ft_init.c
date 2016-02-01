@@ -6,7 +6,7 @@
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/10 10:04:19 by mmartin           #+#    #+#             */
-/*   Updated: 2016/01/29 13:22:45 by mmartin          ###   ########.fr       */
+/*   Updated: 2016/02/01 17:12:06 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@
 
 static void	ft_init_scene(t_data *d)
 {
-	GLuint	vid;
+	GLuint	id;
 
-	glGenVertexArrays(1, &vid);
-	glBindVertexArray(vid);
+	glGenVertexArrays(1, &id);
+	glBindVertexArray(id);
 	d->mode_id = glGetUniformLocation(d->program, "model");
 	d->view_id = glGetUniformLocation(d->program, "view");
 	d->proj_id = glGetUniformLocation(d->program, "projection");

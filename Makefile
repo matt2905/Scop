@@ -6,7 +6,7 @@
 #    By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/06/06 14:10:02 by mmartin           #+#    #+#              #
-#    Updated: 2016/01/29 13:36:40 by mmartin          ###   ########.fr        #
+#    Updated: 2016/02/01 17:01:36 by mmartin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,8 @@ SRC			=	srcs/main.c					\
 				srcs/ft_parse_object.c		\
 				srcs/ft_parse_material.c	\
 				srcs/ft_parse_material2.c	\
+				srcs/ft_parse_material3.c	\
+				srcs/ft_read_tga.c			\
 				srcs/ft_shader.c			\
 				srcs/ft_vector.c			\
 				srcs/ft_vector_tool.c		\

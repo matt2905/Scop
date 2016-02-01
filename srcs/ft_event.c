@@ -6,7 +6,7 @@
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/21 13:35:07 by mmartin           #+#    #+#             */
-/*   Updated: 2016/02/01 12:26:07 by mmartin          ###   ########.fr       */
+/*   Updated: 2016/02/01 15:33:58 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,9 @@ void	ft_render(t_data *d)
 	glUniformMatrix4fv(d->mode_id, 1, GL_FALSE, &d->model[0]);
 	glUniformMatrix4fv(d->view_id, 1, GL_FALSE, &d->view[0]);
 	glUniformMatrix4fv(d->proj_id, 1, GL_FALSE, &d->projection[0]);
+	glEnable(GL_TEXTURE_2D);
 	glDrawArrays(GL_TRIANGLES, 0, d->size_v / 8);
+	glDisable(GL_TEXTURE_2D);
 }
 
 void	ft_compute_mouse(t_data *d)
