@@ -6,7 +6,7 @@
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/01 14:21:57 by mmartin           #+#    #+#             */
-/*   Updated: 2016/02/01 18:00:50 by mmartin          ###   ########.fr       */
+/*   Updated: 2016/02/01 18:29:15 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void		ft_read_file(t_data *d, char *filename)
 	short	bpp;
 	size_t	size;
 
-	if (!(file = fopen(ft_strjoin("resources/", filename), "rb")))
+	if (!(file = fopen(filename, "rb")))
 		return ;
 	fseek(file, 2, SEEK_CUR);
 	fread(&d->texture.type, sizeof(GLubyte), 1, file);
@@ -43,7 +43,12 @@ static void		ft_read_file(t_data *d, char *filename)
 
 void		ft_load_tga(t_data *d)
 {
-	ft_read_file(d, d->mat[0].map_kd);
+	char	*filename;
+
+	filename = ft_strjoin("resources/",
+			d->mat && d->mat[0].map_kd ? d->mat[0].map_kd : "uni.tga");
+	ft_read_file(d, filename);
+	ft_strdel(&filename);
 	glGenTextures(1, &d->texid);
 	glBindTexture(GL_TEXTURE_2D, d->texid);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);

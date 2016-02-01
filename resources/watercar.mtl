@@ -10,7 +10,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd UVWatercarCanon1.png
+map_Kd UVWatercar1.tga
 
 newmtl MatRoueAvt
 Ns 382.500015
@@ -21,7 +21,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd roues.png
+map_Kd roues.tga
 
 newmtl MatRoueAvt.001
 Ns 382.500015
@@ -32,7 +32,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd roues.png
+map_Kd roues.tga
 
 newmtl MatRoueAvt.002
 Ns 382.500015
@@ -43,7 +43,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd roues.png
+map_Kd roues.tga
 
 newmtl MatTruck
 Ns 96.078431
@@ -54,7 +54,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd UVWatercar1.png
+map_Kd UVWatercar1.tga
 
 newmtl Material
 Ns 96.078431
@@ -65,4 +65,4 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd UVWatercarCabine1.png
+map_Kd UVWatercarCabine1.tga
