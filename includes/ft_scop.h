@@ -6,7 +6,7 @@
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/06 16:16:04 by mmartin           #+#    #+#             */
-/*   Updated: 2016/02/01 10:21:17 by mmartin          ###   ########.fr       */
+/*   Updated: 2016/02/01 12:34:15 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct	s_color
 typedef struct	s_mat
 {
 	char		*name;
+
 	float		ns;
 	t_color		ka;
 	t_color		kd;
@@ -55,6 +56,12 @@ typedef struct	s_mat
 	float		ni;
 	float		d;
 	t_color		(*illum)();
+
+	char		*map_ka;
+	char		*map_kd;
+	char		*map_ks;
+	char		*map_ns;
+	char		*map_d;
 }				t_mat;
 
 typedef struct	s_face

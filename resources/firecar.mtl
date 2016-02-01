@@ -10,7 +10,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd Materials/UVFirecar.tga
+map_Kd UVFirecar.tga
 
 newmtl MatCarroserie_UVFirecar.png
 Ns 45.098039
@@ -21,7 +21,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd Materials/UVFirecar.png
+map_Kd UVFirecar.png
 
 newmtl MatRoueAvt
 Ns 382.500015

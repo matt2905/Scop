@@ -6,7 +6,7 @@
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/08 11:00:30 by mmartin           #+#    #+#             */
-/*   Updated: 2016/02/01 10:17:53 by mmartin          ###   ########.fr       */
+/*   Updated: 2016/02/01 12:34:26 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,12 @@ void		ft_delete_obj(t_data *d)
 		ft_memdel((void **)&d->objs[i].vt);
 		ft_memdel((void **)&d->objs[i].vn);
 		ft_delete_face(&d->objs[i]);
+		ft_memdel((void **)&d->objs[i].m.name);
+		ft_memdel((void **)&d->objs[i].m.map_ka);
+		ft_memdel((void **)&d->objs[i].m.map_kd);
+		ft_memdel((void **)&d->objs[i].m.map_ks);
+		ft_memdel((void **)&d->objs[i].m.map_ns);
+		ft_memdel((void **)&d->objs[i].m.map_d);
 		i++;
 	}
 	ft_memdel((void **)&d->objs);

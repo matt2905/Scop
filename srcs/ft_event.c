@@ -6,7 +6,7 @@
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/21 13:35:07 by mmartin           #+#    #+#             */
-/*   Updated: 2016/02/01 10:53:27 by mmartin          ###   ########.fr       */
+/*   Updated: 2016/02/01 12:26:07 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,13 @@ static const t_key	g_key_func[] =
 
 int		ft_escape(t_data *d, double deltatime)
 {
+	(void)deltatime;
 	ft_delete_obj(d);
 	glDeleteBuffers(1, &d->vid);
 	ft_memdel((void **)&d->v);
 	glDisableVertexAttribArray(0);
 	glDisableVertexAttribArray(1);
-	(void)deltatime;
+	glDisableVertexAttribArray(2);
 	return (0);
 }
 
