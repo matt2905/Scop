@@ -6,7 +6,7 @@
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/06 16:16:04 by mmartin           #+#    #+#             */
-/*   Updated: 2016/02/01 17:03:27 by mmartin          ###   ########.fr       */
+/*   Updated: 2016/02/02 10:41:25 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ typedef struct	s_tex_tga
 	short		width;
 	short		height;
 	GLubyte		*data;
-	GLuint		texID;
+	GLuint		texid;
 }				t_tex_tga;
 
 /*
@@ -139,6 +139,10 @@ typedef struct	s_data
 
 	GLuint		texid;
 	t_tex_tga	texture;
+	GLuint		flagid;
+	float		texture_flag;
+	short		okay;
+	short		active;
 
 	GLuint		vid;
 	float		*v;
@@ -202,6 +206,7 @@ int				ft_up(t_data *d, double deltatime);
 int				ft_down(t_data *d, double deltatime);
 int				ft_forward(t_data *d, double deltatime);
 int				ft_backward(t_data *d, double deltatime);
+int				ft_texture(t_data *d, double deltatime);
 
 void			ft_init(t_data *d);
 void			ft_set_perspective(t_data *d);

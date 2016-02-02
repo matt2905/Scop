@@ -6,7 +6,7 @@
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/10 10:53:50 by mmartin           #+#    #+#             */
-/*   Updated: 2016/02/01 12:25:52 by mmartin          ###   ########.fr       */
+/*   Updated: 2016/02/02 10:14:03 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ static void		ft_init_object_opengl(t_data *d)
 	glEnableVertexAttribArray(2);
 	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE,
 			8 * sizeof(float), (void *)(6 * sizeof(float)));
-
 }
 
 void			ft_create_objects(t_data *d)

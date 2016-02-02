@@ -6,7 +6,7 @@
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/01 14:21:57 by mmartin           #+#    #+#             */
-/*   Updated: 2016/02/01 18:29:15 by mmartin          ###   ########.fr       */
+/*   Updated: 2016/02/02 10:14:26 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void		ft_read_file(t_data *d, char *filename)
 	fclose(file);
 }
 
-void		ft_load_tga(t_data *d)
+void			ft_load_tga(t_data *d)
 {
 	char	*filename;
 

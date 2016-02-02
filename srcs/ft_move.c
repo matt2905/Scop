@@ -6,12 +6,27 @@
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/19 20:27:48 by mmartin           #+#    #+#             */
-/*   Updated: 2016/01/21 17:40:58 by mmartin          ###   ########.fr       */
+/*   Updated: 2016/02/02 10:41:57 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
 #include "ft_scop.h"
+
+int		ft_texture(t_data *d, double deltatime)
+{
+	(void)deltatime;
+	if (d->okay)
+	{
+		d->active = (d->active == 0);
+		if (d->active && d->texture_flag < 1)
+			d->texture_flag += 0.01;
+		else if (!d->active && d->texture_flag > 0)
+			d->texture_flag -= 0.01;
+		d->okay = 0;
+	}
+	return (1);
+}
 
 int		ft_right(t_data *d, double deltatime)
 {

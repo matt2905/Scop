@@ -6,7 +6,7 @@
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/10 10:04:19 by mmartin           #+#    #+#             */
-/*   Updated: 2016/02/01 17:12:06 by mmartin          ###   ########.fr       */
+/*   Updated: 2016/02/02 10:38:32 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static void	ft_init_scene(t_data *d)
 	d->mode_id = glGetUniformLocation(d->program, "model");
 	d->view_id = glGetUniformLocation(d->program, "view");
 	d->proj_id = glGetUniformLocation(d->program, "projection");
+	d->flagid = glGetUniformLocation(d->program, "textureFlag");
 	d->camera_pos.z = 5;
 	d->camera_up.y = 1;
 	d->angle_horizontal = 3.14;

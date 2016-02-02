@@ -7,9 +7,13 @@ in		vec2	UV;
 out		vec3	color;
 
 uniform	sampler2D	myTextureSampler;
+uniform lowp float	textureFlag;
 
 void	main()
 {
-	color = fragmentColor;
-	color = texture(myTextureSampler, UV).rgb;
+	color = mix(
+				fragmentColor,
+				texture(myTextureSampler, UV).rgb,
+				textureFlag
+				);
 }
