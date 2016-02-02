@@ -6,7 +6,7 @@
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/29 13:28:21 by mmartin           #+#    #+#             */
-/*   Updated: 2016/02/01 20:01:37 by mmartin          ###   ########.fr       */
+/*   Updated: 2016/02/02 11:44:46 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,31 @@ static void		ft_push_triangle(t_data *d, t_vertex v, t_vertex vt, int *index)
 	i++;
 }
 
-static t_vertex	ft_def(void)
+static t_vertex	ft_def(t_data *d, t_vertex pt)
 {
-	t_vertex	nul;
+	t_vertex		nul;
+	static t_vertex	min;
+	static t_vertex	max;
+	int				i;
+	int				j;
 
-	nul.x = 0;
-	nul.y = 0;
+	if (min.x == max.x && min.y == max.y && min.z == max.z)
+	{
+		i = -1;
+		while (++i < d->nb_obj)
+		{
+			j = -1;
+			while (++j < d->objs[i].nb_v)
+			{
+				min.x = d->objs[i].v[j].x < min.x ? d->objs[i].v[j].x : min.x;
+				min.y = d->objs[i].v[j].y < min.y ? d->objs[i].v[j].y : min.y;
+				max.x = d->objs[i].v[j].x > max.x ? d->objs[i].v[j].x : max.x;
+				max.y = d->objs[i].v[j].y > max.y ? d->objs[i].v[j].y : max.y;
+			}
+		}
+	}
+	nul.x = (pt.x - min.x) / (max.x - min.x);
+	nul.y = (pt.y - min.x) / (max.y - min.y);
 	nul.z = 0;
 	return (nul);
 }
@@ -56,15 +75,17 @@ void			ft_cutt_triangle(t_data *d, int *index, t_obj o, t_face *f)
 
 	i = 0;
 	c = o.v[f[f[0].len - 1].iv - 1];
-	ct = ((int)f[f[0].len - 1].ivt - 1 >= 0 ?
-			o.vt[f[f[0].len - 1].ivt - 1] : ft_def());
+	ct = ((int)f[f[0].len - 1].ivt - 1 >= 0 && o.vt ?
+			o.vt[f[f[0].len - 1].ivt - 1] : ft_def(d, c));
 	while (++i < f[0].len - 2)
 	{
 		v = o.v[f[i].iv - 1];
-		vt = ((int)f[i].ivt - 1 >= 0 ? o.vt[f[i].ivt - 1] : ft_def());
+		vt = ((int)f[i].ivt - 1 >= 0 && o.vt ?
+				o.vt[f[i].ivt - 1] : ft_def(d, v));
 		ft_push_triangle(d, v, vt, index);
 		v = o.v[f[i + 1].iv - 1];
-		vt = ((int)f[i + 1].ivt - 1 >= 0 ? o.vt[f[i + 1].ivt - 1] : ft_def());
+		vt = ((int)f[i + 1].ivt - 1 >= 0 && o.vt ?
+				o.vt[f[i + 1].ivt - 1] : ft_def(d, v));
 		ft_push_triangle(d, v, vt, index);
 		ft_push_triangle(d, c, ct, index);
 	}
