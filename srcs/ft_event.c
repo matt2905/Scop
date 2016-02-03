@@ -6,7 +6,7 @@
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/21 13:35:07 by mmartin           #+#    #+#             */
-/*   Updated: 2016/02/03 12:45:01 by mmartin          ###   ########.fr       */
+/*   Updated: 2016/02/03 15:49:30 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int		ft_escape(t_data *d, double deltatime)
 	i = -1;
 	(void)deltatime;
 	ft_delete_obj(d);
+	ft_delete_mat(d);
 	while (++i < d->nb_obj)
 		glDeleteBuffers(1, &d->texid[i]);
 	ft_memdel((void **)&d->v);

@@ -6,7 +6,7 @@
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/08 17:13:22 by mmartin           #+#    #+#             */
-/*   Updated: 2016/02/01 17:36:01 by mmartin          ###   ########.fr       */
+/*   Updated: 2016/02/03 16:09:41 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ static const t_mat_p	g_parse[] =
 	{"Ni", ft_get_density},
 	{"d", ft_get_transparency},
 	{"illum", ft_get_light_calc},
-	{"map_Ka", ft_get_map_ka},
+	{"map_kA", ft_get_map_ka},
 	{"map_Kd", ft_get_map_kd},
-	{"map_Ks", ft_get_map_ks},
+	{"map_kS", ft_get_map_ks},
 	{"map_Ns", ft_get_map_ns},
-	{"map_D", ft_get_map_d}
+	{"map_d", ft_get_map_d}
 };
 
 static int	ft_open_file_mat(const char *file_mat, const char *file_obj)

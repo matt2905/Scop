@@ -6,7 +6,7 @@
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/06 16:16:04 by mmartin           #+#    #+#             */
-/*   Updated: 2016/02/03 11:25:04 by mmartin          ###   ########.fr       */
+/*   Updated: 2016/02/03 15:49:40 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,8 @@ typedef struct	s_obj
 
 typedef struct	s_data
 {
+	char		*filename;
+
 	GLFWwindow	*win;
 	GLuint		program;
 
@@ -217,6 +219,7 @@ void			ft_attach_shader(GLuint program, GLuint shader);
 void			ft_triangulate_object(t_data *d, t_obj o, int *b);
 
 void			ft_delete_obj(t_data *d);
+void			ft_delete_mat(t_data *d);
 void			ft_load_tga(t_data *d);
 
 /*

@@ -6,7 +6,7 @@
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/06 17:51:51 by mmartin           #+#    #+#             */
-/*   Updated: 2016/01/29 16:42:10 by mmartin          ###   ########.fr       */
+/*   Updated: 2016/02/03 14:58:33 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,6 @@ t_data		*ft_parse(char *file)
 		ft_strdel(&line);
 	}
 	close(fd);
+	d->filename = file;
 	return (d);
 }

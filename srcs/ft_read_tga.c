@@ -6,7 +6,7 @@
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/01 14:21:57 by mmartin           #+#    #+#             */
-/*   Updated: 2016/02/03 12:44:46 by mmartin          ###   ########.fr       */
+/*   Updated: 2016/02/03 16:20:56 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ void			ft_load_tga(t_data *d)
 	d->texid = (GLuint *)ft_memalloc(sizeof(*d->texid) * d->nb_obj);
 	while (++i < d->nb_obj)
 	{
-		filename = ft_strjoin("resources/",
-				d->objs[i].m.map_kd ? d->objs[i].m.map_kd : "uni.tga");
+		filename = ft_strjoin(d->filename,
+				d->objs[i].m.map_kd ? d->objs[i].m.map_kd : "../uni.tga");
 		ft_read_file(&d->texture[i], filename);
 		ft_strdel(&filename);
 		glGenTextures(1, &d->texid[i]);
