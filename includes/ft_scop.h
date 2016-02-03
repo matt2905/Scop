@@ -6,7 +6,7 @@
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/06 16:16:04 by mmartin           #+#    #+#             */
-/*   Updated: 2016/02/02 10:41:25 by mmartin          ###   ########.fr       */
+/*   Updated: 2016/02/03 11:25:04 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,8 +137,8 @@ typedef struct	s_data
 	float		mouse_speed;
 	float		last_time;
 
-	GLuint		texid;
-	t_tex_tga	texture;
+	GLuint		*texid;
+	t_tex_tga	*texture;
 	GLuint		flagid;
 	float		texture_flag;
 	short		okay;
@@ -146,7 +146,8 @@ typedef struct	s_data
 
 	GLuint		vid;
 	float		*v;
-	size_t		size_v;
+	GLint		*start;
+	GLsizei		*size_v;
 }				t_data;
 
 /*
@@ -213,7 +214,7 @@ void			ft_set_perspective(t_data *d);
 void			ft_create_objects(t_data *d);
 GLuint			ft_get_shader(GLenum type, const char *file);
 void			ft_attach_shader(GLuint program, GLuint shader);
-void			ft_cutt_triangle(t_data *d, int *i, t_obj o, t_face *f);
+void			ft_triangulate_object(t_data *d, t_obj o, int *b);
 
 void			ft_delete_obj(t_data *d);
 void			ft_load_tga(t_data *d);

@@ -6,7 +6,7 @@
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/01 14:21:57 by mmartin           #+#    #+#             */
-/*   Updated: 2016/02/02 11:08:05 by mmartin          ###   ########.fr       */
+/*   Updated: 2016/02/03 12:44:46 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "libft.h"
 #include "ft_scop.h"
 
-static void		ft_read_file(t_data *d, char *filename)
+static void		ft_read_file(t_tex_tga *texture, char *filename)
 {
 	FILE	*file;
 	short	bpp;
@@ -23,38 +23,46 @@ static void		ft_read_file(t_data *d, char *filename)
 	if (!(file = fopen(filename, "rb")))
 		return ;
 	fseek(file, 2, SEEK_CUR);
-	fread(&d->texture.type, sizeof(GLubyte), 1, file);
-	if (d->texture.type != 2 && d->texture.type != 3)
+	fread(&(*texture).type, sizeof(GLubyte), 1, file);
+	if ((*texture).type != 2 && (*texture).type != 3)
 	{
 		fclose(file);
 		return ;
 	}
 	fseek(file, 4 * sizeof(short) + sizeof(GLubyte), SEEK_CUR);
-	fread(&d->texture.width, sizeof(short), 1, file);
-	fread(&d->texture.height, sizeof(short), 1, file);
-	fread(&d->texture.bit_count, sizeof(GLubyte), 1, file);
+	fread(&(*texture).width, sizeof(short), 1, file);
+	fread(&(*texture).height, sizeof(short), 1, file);
+	fread(&(*texture).bit_count, sizeof(GLubyte), 1, file);
 	fseek(file, 1, SEEK_CUR);
-	bpp = d->texture.bit_count / 8;
-	size = d->texture.width * d->texture.height * bpp;
-	d->texture.data = (GLubyte *)ft_memalloc(sizeof(GLubyte) * size);
-	fread(d->texture.data, sizeof(GLubyte), size, file);
+	bpp = (*texture).bit_count / 8;
+	size = (*texture).width * (*texture).height * bpp;
+	(*texture).data = (GLubyte *)ft_memalloc(sizeof(GLubyte) * size);
+	fread((*texture).data, sizeof(GLubyte), size, file);
 	fclose(file);
 }
 
 void			ft_load_tga(t_data *d)
 {
 	char	*filename;
+	int		i;
 
-	filename = ft_strjoin("resources/",
-			d->mat && d->mat[0].map_kd ? d->mat[0].map_kd : "uni.tga");
-	ft_read_file(d, filename);
-	ft_strdel(&filename);
-	glGenTextures(1, &d->texid);
-	glBindTexture(GL_TEXTURE_2D, d->texid);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, d->texture.width,
-			d->texture.height, 0, GL_BGRA,
-			GL_UNSIGNED_BYTE, d->texture.data);
-	ft_memdel((void **)&d->texture.data);
+	i = -1;
+	d->texture = (t_tex_tga *)ft_memalloc(sizeof(*d->texture) * d->nb_obj);
+	d->texid = (GLuint *)ft_memalloc(sizeof(*d->texid) * d->nb_obj);
+	while (++i < d->nb_obj)
+	{
+		filename = ft_strjoin("resources/",
+				d->objs[i].m.map_kd ? d->objs[i].m.map_kd : "uni.tga");
+		ft_read_file(&d->texture[i], filename);
+		ft_strdel(&filename);
+		glGenTextures(1, &d->texid[i]);
+		glBindTexture(GL_TEXTURE_2D, d->texid[i]);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, d->texture[i].width,
+				d->texture[i].height, 0, GL_BGRA,
+				GL_UNSIGNED_BYTE, d->texture[i].data);
+		ft_memdel((void **)&d->texture[i].data);
+	}
+	ft_memdel((void **)&d->texture);
 }

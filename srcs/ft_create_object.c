@@ -6,41 +6,44 @@
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/10 10:53:50 by mmartin           #+#    #+#             */
-/*   Updated: 2016/02/02 10:14:03 by mmartin          ###   ########.fr       */
+/*   Updated: 2016/02/03 12:39:05 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "ft_scop.h"
 
-static size_t	ft_get_size(t_obj *o, int len)
+static size_t	ft_set_size(t_data *d)
 {
 	int		i;
 	int		j;
-	size_t	size;
 	int		tmp;
+	size_t	size;
 
-	i = 0;
+	i = -1;
 	size = 0;
-	while (i < len)
+	while (++i < d->nb_obj)
 	{
-		j = 0;
-		while (j < o[i].nb_f)
+		d->size_v[i] = 0;
+		j = -1;
+		while (++j < d->objs[i].nb_f)
 		{
-			tmp = o[i].f[j][0].len - 1;
-			size += (tmp - 2) * 3;
-			j++;
+			tmp = d->objs[i].f[j][0].len - 1;
+			d->size_v[i] += (tmp - 2) * 3 * 8;
 		}
-		i++;
+		size += d->size_v[i];
 	}
-	return (size * 8);
+	return (size);
 }
 
-static void		ft_init_object_opengl(t_data *d)
+static void		ft_init_object_opengl(t_data *d, size_t size)
 {
+	int		i;
+
+	i = -1;
 	glGenBuffers(1, &d->vid);
 	glBindBuffer(GL_ARRAY_BUFFER, d->vid);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(*d->v) * d->size_v,
+	glBufferData(GL_ARRAY_BUFFER, sizeof(*d->v) * size,
 			&d->v[0], GL_STATIC_DRAW);
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE,
@@ -56,21 +59,21 @@ static void		ft_init_object_opengl(t_data *d)
 void			ft_create_objects(t_data *d)
 {
 	int		i;
-	int		j;
+	size_t	size;
 	int		begin;
 
 	i = -1;
 	begin = 0;
-	d->v = NULL;
-	d->size_v = ft_get_size(d->objs, d->nb_obj);
-	d->v = (float *)ft_memalloc(sizeof(*d->v) * d->size_v);
+	d->size_v = (GLsizei *)ft_memalloc(sizeof(*d->size_v) * d->nb_obj);
+	d->start = (GLint *)ft_memalloc(sizeof(*d->start) * d->nb_obj);
+	size = ft_set_size(d);
+	d->v = (float *)ft_memalloc(sizeof(*d->v) * size);
 	while (++i < d->nb_obj)
 	{
-		j = -1;
-		while (++j < d->objs[i].nb_f)
-			ft_cutt_triangle(d, &begin, d->objs[i], d->objs[i].f[j]);
+		d->start[i] = begin / 8;
+		ft_triangulate_object(d, d->objs[i], &begin);
 	}
 	if (!d->v)
 		return ;
-	ft_init_object_opengl(d);
+	ft_init_object_opengl(d, size);
 }

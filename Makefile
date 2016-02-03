@@ -6,12 +6,12 @@
 #    By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/06/06 14:10:02 by mmartin           #+#    #+#              #
-#    Updated: 2016/02/02 11:45:03 by mmartin          ###   ########.fr        #
+#    Updated: 2016/02/03 10:32:38 by mmartin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC			=	gcc
-CFLAGS		=	-Wall -Werror -Wextra
+CFLAGS		=	-Wall -Werror -Wextra -g
 INC			=	-I$(HOME)/.brew/include -I./includes -I./libft/includes
 LIB			=	-L./libft -lft -L$(HOME)/.brew/lib -lglfw3 -framework OpenGl -framework AppKit
 

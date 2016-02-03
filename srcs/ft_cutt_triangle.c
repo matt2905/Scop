@@ -6,7 +6,7 @@
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/29 13:28:21 by mmartin           #+#    #+#             */
-/*   Updated: 2016/02/02 11:44:46 by mmartin          ###   ########.fr       */
+/*   Updated: 2016/02/03 11:24:21 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,20 @@ static const float	g_color[3][3] =
 	{0.0f, 0.0f, 1.0f}
 };
 
-static void		ft_push_triangle(t_data *d, t_vertex v, t_vertex vt, int *index)
+static void		ft_push_triangle(float **d, t_vertex v, t_vertex vt, int *index)
 {
 	static int	i = 0;
 
 	if (i >= 3)
 		i = 0;
-	d->v[(*index)++] = v.x;
-	d->v[(*index)++] = v.y;
-	d->v[(*index)++] = v.z;
-	d->v[(*index)++] = g_color[i][0];
-	d->v[(*index)++] = g_color[i][1];
-	d->v[(*index)++] = g_color[i][2];
-	d->v[(*index)++] = vt.x;
-	d->v[(*index)++] = vt.y;
+	(*d)[(*index)++] = v.x;
+	(*d)[(*index)++] = v.y;
+	(*d)[(*index)++] = v.z;
+	(*d)[(*index)++] = g_color[i][0];
+	(*d)[(*index)++] = g_color[i][1];
+	(*d)[(*index)++] = g_color[i][2];
+	(*d)[(*index)++] = vt.x;
+	(*d)[(*index)++] = vt.y;
 	i++;
 }
 
@@ -65,7 +65,7 @@ static t_vertex	ft_def(t_data *d, t_vertex pt)
 	return (nul);
 }
 
-void			ft_cutt_triangle(t_data *d, int *index, t_obj o, t_face *f)
+void			ft_cutt_triangle(float **dst, int *index, t_obj o, t_face *f)
 {
 	size_t		i;
 	t_vertex	v;
@@ -76,17 +76,27 @@ void			ft_cutt_triangle(t_data *d, int *index, t_obj o, t_face *f)
 	i = 0;
 	c = o.v[f[f[0].len - 1].iv - 1];
 	ct = ((int)f[f[0].len - 1].ivt - 1 >= 0 && o.vt ?
-			o.vt[f[f[0].len - 1].ivt - 1] : ft_def(d, c));
+			o.vt[f[f[0].len - 1].ivt - 1] : ft_def(NULL, c));
 	while (++i < f[0].len - 2)
 	{
 		v = o.v[f[i].iv - 1];
 		vt = ((int)f[i].ivt - 1 >= 0 && o.vt ?
-				o.vt[f[i].ivt - 1] : ft_def(d, v));
-		ft_push_triangle(d, v, vt, index);
+				o.vt[f[i].ivt - 1] : ft_def(NULL, v));
+		ft_push_triangle(dst, v, vt, index);
 		v = o.v[f[i + 1].iv - 1];
 		vt = ((int)f[i + 1].ivt - 1 >= 0 && o.vt ?
-				o.vt[f[i + 1].ivt - 1] : ft_def(d, v));
-		ft_push_triangle(d, v, vt, index);
-		ft_push_triangle(d, c, ct, index);
+				o.vt[f[i + 1].ivt - 1] : ft_def(NULL, v));
+		ft_push_triangle(dst, v, vt, index);
+		ft_push_triangle(dst, c, ct, index);
 	}
+}
+
+void			ft_triangulate_object(t_data *d, t_obj o, int *index)
+{
+	int		j;
+
+	j = -1;
+	ft_def(d, d->objs[0].v[0]);
+	while (++j < o.nb_f)
+		ft_cutt_triangle(&d->v, index, o, o.f[j]);
 }
