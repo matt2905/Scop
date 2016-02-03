@@ -6,7 +6,7 @@
 #    By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/06/06 14:10:02 by mmartin           #+#    #+#              #
-#    Updated: 2016/02/03 10:32:38 by mmartin          ###   ########.fr        #
+#    Updated: 2016/02/03 13:17:54 by mmartin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -81,6 +81,6 @@ fclean:		clean
 re:			fclean all
 
 norme:
-	find . -name "*.[ch]" -exec /usr/bin/norminette {} \+
+	find . -name "*.[ch]" -exec /usr/bin/norminette {} \+ | grep "Error\|Warning" || echo "All Good"
 
 .PHONY:		all re fclean clean
