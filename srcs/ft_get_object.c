@@ -6,7 +6,7 @@
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/08 10:44:59 by mmartin           #+#    #+#             */
-/*   Updated: 2016/01/29 17:02:01 by mmartin          ###   ########.fr       */
+/*   Updated: 2016/02/05 12:10:05 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void		ft_loop_object(t_data *d, int fd, t_obj *new)
 	while (get_next_line(fd, &line) > 0 && ft_strncmp(line, "o ", 2))
 	{
 		i = -1;
-		tab = ft_strsplit(line, ' ');
+		tab = ft_strsplit_space(line);
 		while (++i < len)
 		{
 			if (!ft_strcmp(g_parse[i].cmp, tab[0]))
@@ -57,7 +57,7 @@ static void		ft_first_line(t_data *d, t_obj *new, char *tmp)
 
 	len = sizeof(g_parse) / sizeof(t_parse);
 	i = -1;
-	tab = ft_strsplit(tmp, ' ');
+	tab = ft_strsplit_space(tmp);
 	while (++i < len)
 	{
 		if (!ft_strcmp(g_parse[i].cmp, tab[0]))

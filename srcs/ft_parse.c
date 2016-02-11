@@ -6,7 +6,7 @@
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/06 17:51:51 by mmartin           #+#    #+#             */
-/*   Updated: 2016/02/03 14:58:33 by mmartin          ###   ########.fr       */
+/*   Updated: 2016/02/11 11:21:42 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,24 @@ t_data		*ft_parse(char *file)
 	int		fd;
 	t_data	*d;
 	char	*line;
-	int		obj;
+	char	**tab;
+	char	*tmp;
 
-	obj = 0;
 	if ((fd = open(file, O_RDONLY)) == -1)
 		return (NULL);
 	if (!(d = (t_data *)ft_memalloc(sizeof(*d))))
 		return (NULL);
+	tmp = ft_strrchr(file, '/');
+	*(tmp + 1) = 0;
 	while (get_next_line(fd, &line) > 0)
 	{
-		if (!ft_strncmp(line, "mtllib ", 7))
-			ft_get_materials(d, line + 7, file);
-		else if (!ft_strncmp(line, "o ", 2) || !ft_strncmp(line, "v ", 2))
+		tab = ft_strsplit_space(line);
+		if (!ft_strcmp(tab[0], "mtllib"))
+			ft_get_materials(d, tab[1], file);
+		else if (!ft_strcmp(tab[0], "o") || !ft_strcmp(tab[0], "v"))
 			ft_get_object(d, fd, line);
 		ft_strdel(&line);
+		ft_tabdel(&tab);
 	}
 	close(fd);
 	d->filename = file;

@@ -6,7 +6,7 @@
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/29 13:28:21 by mmartin           #+#    #+#             */
-/*   Updated: 2016/02/03 15:32:48 by mmartin          ###   ########.fr       */
+/*   Updated: 2016/02/11 11:18:15 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,7 @@ static t_vertex	ft_def(t_data *d, t_vertex pt)
 		}
 	}
 	nul.x = (pt.x - min.x) / (max.x - min.x);
-	nul.y = (pt.y - min.x) / (max.y - min.y);
-	nul.z = 0;
+	nul.y = (pt.y - min.y) / (max.y - min.y);
 	return (nul);
 }
 
