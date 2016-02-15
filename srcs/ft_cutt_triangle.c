@@ -6,7 +6,7 @@
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/29 13:28:21 by mmartin           #+#    #+#             */
-/*   Updated: 2016/02/11 11:18:15 by mmartin          ###   ########.fr       */
+/*   Updated: 2016/02/15 11:19:39 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,10 @@ static t_vertex	ft_def(t_data *d, t_vertex pt)
 	int				i;
 	int				j;
 
-	if (min.x == max.x && min.y == max.y && min.z == max.z)
+	if (min.x == max.x && min.y == max.y && min.z == max.z && (i = -1))
 	{
-		i = -1;
-		while (++i < d->nb_obj)
+		while (++i < d->nb_obj && (j = -1))
 		{
-			j = -1;
 			while (++j < d->objs[i].nb_v)
 			{
 				min.x = d->objs[i].v[j].x < min.x ? d->objs[i].v[j].x : min.x;

@@ -6,12 +6,12 @@
 #    By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/06/06 14:10:02 by mmartin           #+#    #+#              #
-#    Updated: 2016/02/03 13:17:54 by mmartin          ###   ########.fr        #
+#    Updated: 2016/02/15 14:50:34 by mmartin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC			=	gcc
-CFLAGS		=	-Wall -Werror -Wextra -g
+CFLAGS		=	-Wall -Werror -Wextra
 INC			=	-I$(HOME)/.brew/include -I./includes -I./libft/includes
 LIB			=	-L./libft -lft -L$(HOME)/.brew/lib -lglfw3 -framework OpenGl -framework AppKit
 
@@ -81,6 +81,6 @@ fclean:		clean
 re:			fclean all
 
 norme:
-	find . -name "*.[ch]" -exec /usr/bin/norminette {} \+ | grep "Error\|Warning" || echo "All Good"
+	find . -name "*.[ch]" -exec /usr/bin/norminette {} \+ | grep "Error\|Warning" || echo "\033[32mAll Good\033[0m"
 
 .PHONY:		all re fclean clean

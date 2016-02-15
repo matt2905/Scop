@@ -6,7 +6,7 @@
 /*   By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/06 16:16:04 by mmartin           #+#    #+#             */
-/*   Updated: 2016/02/03 15:49:40 by mmartin          ###   ########.fr       */
+/*   Updated: 2016/02/11 16:14:29 by mmartin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,22 @@ typedef struct	s_color
 	float		b;
 }				t_color;
 
+typedef struct	s_tga_header
+{
+	GLubyte		header[12];
+}				t_tga_header;
+
 typedef struct	s_tex_tga
 {
-	GLubyte		type;
-	GLubyte		bit_count;
-	short		width;
-	short		height;
+	GLubyte		header[6];
+	GLuint		bpp_file;
+	GLuint		size;
+	GLuint		tmp;
+	GLuint		type;
+	GLuint		height;
+	GLuint		width;
+	GLuint		bpp;
 	GLubyte		*data;
-	GLuint		texid;
 }				t_tex_tga;
 
 /*

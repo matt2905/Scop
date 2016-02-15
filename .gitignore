@@ -40,3 +40,6 @@ scop
 
 # Debug files
 *.dSYM/
+
+# Trash Mac Os
+.DS_Store
