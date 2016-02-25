@@ -6,17 +6,17 @@
 #    By: mmartin <mmartin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/06/06 14:10:02 by mmartin           #+#    #+#              #
-#    Updated: 2016/02/15 14:50:34 by mmartin          ###   ########.fr        #
+#    Updated: 2016/02/25 09:40:07 by mmartin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC			=	gcc
 CFLAGS		=	-Wall -Werror -Wextra
-INC			=	-I$(HOME)/.brew/include -I./includes -I./libft/includes
-LIB			=	-L./libft -lft -L$(HOME)/.brew/lib -lglfw3 -framework OpenGl -framework AppKit
+INC			=	-I$(HOME)/.brew/include -I./includes -I./Libft/includes
+LIB			=	-L./Libft -lft -L$(HOME)/.brew/lib -lglfw3 -framework OpenGl -framework AppKit
 
 NAME		=	scop
-LIBFT		=	libft/libft.a
+LIBFT		=	Libft/libft.a
 
 DOBJ		=	obj/
 
@@ -58,7 +58,7 @@ $(NAME):	$(OBJ)
 $(LIBFT):
 	@git submodule init
 	@git submodule update
-	@Make -C libft
+	@Make -C Libft
 
 -include	$(OBJ:.o=.d)
 
@@ -73,7 +73,7 @@ clean:
 	@echo "\033[31mObjects of $(NAME) : deleted\033[0m"
 
 fclean:		clean
-	@Make fclean -C libft
+	@Make fclean -C Libft
 	@/bin/rm -f $(NAME)
 	@/bin/rm -rf $(NAME).dSYM
 	@echo "\033[31m$(NAME) : deleted\033[0m"
