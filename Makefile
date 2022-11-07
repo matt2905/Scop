@@ -58,7 +58,7 @@ $(NAME):	$(OBJ)
 $(LIBFT):
 	@git submodule init
 	@git submodule update
-	@Make -C Libft
+	@make -C Libft
 
 -include	$(OBJ:.o=.d)
 
@@ -73,14 +73,11 @@ clean:
 	@echo "\033[31mObjects of $(NAME) : deleted\033[0m"
 
 fclean:		clean
-	@Make fclean -C Libft
+	@make fclean -C Libft
 	@/bin/rm -f $(NAME)
 	@/bin/rm -rf $(NAME).dSYM
 	@echo "\033[31m$(NAME) : deleted\033[0m"
 
 re:			fclean all
-
-norme:
-	find . -name "*.[ch]" -exec /usr/bin/norminette {} \+ | grep "Error\|Warning" || echo "\033[32mAll Good\033[0m"
 
 .PHONY:		all re fclean clean
