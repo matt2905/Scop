@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include <OpenGL/GL.h>
+#include <GLES3/gl3.h>
 #include "libft.h"
 #include "printf.h"
 

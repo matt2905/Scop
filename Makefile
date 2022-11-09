@@ -11,9 +11,10 @@
 # **************************************************************************** #
 
 CC			=	gcc
-CFLAGS		=	-Wall -Werror -Wextra
+CFLAGS		=	-Wall -Werror -Wextra --pedantic
+LDFLAGS		=	"-Wl,--no-as-needed,-ldl"
 INC			=	-I$(HOME)/.brew/include -I./includes -I./Libft/includes
-LIB			=	-L./Libft -lft -L$(HOME)/.brew/lib -lglfw3 -framework OpenGl -framework AppKit
+LIB			=	-L./Libft -lft -lGL -lglfw3 -lm -lpthread
 
 NAME		=	scop
 LIBFT		=	Libft/libft.a
@@ -46,13 +47,13 @@ SRC			=	srcs/main.c					\
 
 OBJ			=	$(patsubst %.c, $(DOBJ)%.o, $(SRC))
 DEPS		=	$(patsubst %.c, $(DOBJ)%.d, $(SRC))
-DEPENDS		=	-MT $@ -MD -MP -MF $(subst .o,.d,$@)
+DEPENDS		=	-MT $@ -MMD -MP -MF $(subst .o,.d,$@)
 
 all:		$(LIBFT) $(NAME)
 
 $(NAME):	$(OBJ)
 	@echo "\033[32m$(CC) \033[33m$(CFLAGS) \033[36m-o $@ $^ $(LIB)\033[0m"
-	@$(CC) $(CFLAGS) -o $@ $^ $(LIB)
+	@$(CC) $(CFLAGS) -o $@ $^ $(LIB) $(LDFLAGS)
 	@echo "\033[33m"Compilation of $@ : "\033[32m"Success"\033[0m"
 
 $(LIBFT):

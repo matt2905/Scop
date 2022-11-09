@@ -38,9 +38,6 @@ static size_t	ft_set_size(t_data *d)
 
 static void		ft_init_object_opengl(t_data *d, size_t size)
 {
-	int		i;
-
-	i = -1;
 	glGenBuffers(1, &d->vid);
 	glBindBuffer(GL_ARRAY_BUFFER, d->vid);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(*d->v) * size,

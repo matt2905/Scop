@@ -14,8 +14,7 @@
 # define FT_SCOP_H
 
 # include <string.h>
-# include <OpenGL/gl3.h>
-# define GLFW_INCLUDE_NONE
+# include <GLES3/gl3.h>
 # include <GLFW/glfw3.h>
 
 # define WIDTH	1024
